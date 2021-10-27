@@ -1,7 +1,8 @@
 #include <SFML/Graphics.hpp>
+#include "units.h"
 
 int main() {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "Lesson 1. kychka-pc.ru");
+	/*sf::RenderWindow window(sf::VideoMode(200, 200), "Lesson 1. kychka-pc.ru");
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
  
@@ -17,7 +18,12 @@ int main() {
 		window.clear();
 		window.draw(shape);
 		window.display();
-	}
+	}*/
+
+    PlayerUnits Warrior(300, 100);
+
+    std::cout << Warrior.GetDMG() << std::endl;
+    std::cout << Warrior.GetHP() << std::endl;
  
 	return 0;
 }
