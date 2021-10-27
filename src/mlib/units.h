@@ -52,7 +52,19 @@ class PlayerUnits : public Units {
 };
 
 class AIUnits : public Units {
+    public:
 
+    AIUnits() {
+        HP = 100;
+        DMG = 20;
+    }
+
+    AIUnits(int HP, int DMG) {
+        this->HP = HP;
+        this->DMG = DMG;
+    }
+
+    protected:
 };
 
 #endif //  UNITS_H_
