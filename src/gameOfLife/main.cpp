@@ -2,7 +2,7 @@
 #include "units.h"
 
 int main() {
-	/*sf::RenderWindow window(sf::VideoMode(200, 200), "Lesson 1. kychka-pc.ru");
+	sf::RenderWindow window(sf::VideoMode(1000, 800), "Game");
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
  
@@ -18,12 +18,14 @@ int main() {
 		window.clear();
 		window.draw(shape);
 		window.display();
-	}*/
+	}
 
-    PlayerUnits Warrior(300, 100);
+    Hero Warrior(300, 30, 50, 50);
 
     std::cout << Warrior.GetDMG() << std::endl;
     std::cout << Warrior.GetHP() << std::endl;
+	std::cout << Warrior.GetCoordX() << std::endl;
+    std::cout << Warrior.GetCoordY() << std::endl;
  
 	return 0;
 }

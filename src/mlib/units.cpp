@@ -11,3 +11,11 @@ int Units::GetDMG() {
 std::string Units::GetName() {
     return unitName;
 }
+
+float Units::GetCoordX() {
+    return coordinateX;
+}
+
+float Units::GetCoordY() {
+    return coordinateY;
+}
