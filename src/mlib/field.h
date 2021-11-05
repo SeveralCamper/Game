@@ -53,4 +53,45 @@ class Field {
         sf::Sprite grassSprite;
 };
 
+class Environment {
+    public:
+
+    Environment() {
+
+        bridge02Texture.loadFromFile("sprites/tds-modern-tilesets-environment/Bridges/Sprite-0002.png");
+        bridge02Sprite.setTexture(bridge02Texture);
+
+        dirtTexture.loadFromFile("sprites/tds-modern-tilesets-environment/Tiles/_0001_DirtTiles.png");
+        dirtSprite.setTexture(dirtTexture);
+
+        sandTexture.loadFromFile("sprites/tds-modern-tilesets-environment/Tiles/_0002_SandTiles.png");
+        sandSprite.setTexture(sandTexture);
+
+        grassTexture.loadFromFile("sprites/tds-modern-tilesets-environment/Tiles/_0003_GrassTiles.png");
+        grassSprite.setTexture(grassTexture);
+
+    }
+
+    ~Environment() {
+
+    }
+
+    void SetEnvironment(sf::RenderWindow& window);
+
+    private:
+
+
+        sf::Texture bridge02Texture;
+        sf::Sprite bridge02Sprite;
+
+        sf::Texture dirtTexture;
+        sf::Sprite dirtSprite;
+
+        sf::Texture sandTexture;
+        sf::Sprite sandSprite;
+
+        sf::Texture grassTexture;
+        sf::Sprite grassSprite;
+};
+
 #endif //  FILED_H_

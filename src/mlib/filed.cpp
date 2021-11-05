@@ -90,3 +90,9 @@ void Field::SetFiled(sf::RenderWindow &window)
         }
     }
 }
+
+void Environment::SetEnvironment(sf::RenderWindow& window) {
+    bridge02Sprite.setPosition(500, 600);
+    bridge02Sprite.~Transformable. scale()
+    window.draw(bridge02Sprite);
+}

@@ -6,6 +6,8 @@
 int main() {
 	Field GameField;
 
+	Environment Item;
+
 	Hero Allan(300, 30, 100, 100);
 	FriendlySoldier SoldierF1(300, 30, 50, 50);
 	EnemySoldier SoldierE1(300, 30, 150, 150);
@@ -32,6 +34,7 @@ int main() {
 
 		window.clear();
 		GameField.SetFiled(window);
+		Item.SetEnvironment(window);
 		window.draw(Allan.getSprite());
 		window.draw(SoldierF1.getSprite());
 		window.draw(SoldierE1.getSprite());
