@@ -45,7 +45,7 @@ clean:
 	find . -name "*.o" -exec rm '{}' \;
 	find . -name "*.d" -exec rm '{}' \;
 	find . -name "*.a" -exec rm '{}' \;
-	find ./bin -type f -name "GameOfLife" -exec rm -f '{}' \;
+	find ./bin -type f -name "gameOfLife" -exec rm -f '{}' \;
 	find ./src/mlib -type f -name "logic" -exec rm -f '{}' \;
 
 format:

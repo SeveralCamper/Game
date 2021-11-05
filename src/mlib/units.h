@@ -57,7 +57,9 @@ class Hero : public PlayerUnits {
     Hero() {
         HP = 300;
         DMG = 30;
-        texture.loadFromFile("../../sprites/tds-modern-hero-weapons-and-props/Hero_pistol/Hero_Pistol.png");
+        heroTexture.loadFromFile("sprites/tds-modern-hero-weapons-and-props/Hero_Pistol/Hero_Pistol.png");
+        heroSprite.setTexture(heroTexture);
+        heroSprite.setPosition(0, 0);
     }
 
     Hero(int HP, int DMG, float coordinateX, float coordinateY) {
@@ -65,12 +67,19 @@ class Hero : public PlayerUnits {
         this->DMG = DMG;
         this->coordinateX = coordinateX;
         this->coordinateY = coordinateY;
-        texture.loadFromFile("../../sprites/tds-modern-hero-weapons-and-props/Hero_pistol/Hero_Pistol.png");
+        heroTexture.loadFromFile("sprites/tds-modern-hero-weapons-and-props/Hero_Pistol/Hero_Pistol.png");
+        heroSprite.setTexture(heroTexture);
+        heroSprite.setPosition(coordinateX, coordinateY);
+    }
+
+    sf::Sprite getSprite() {
+        return heroSprite;
     }
 
     protected:
 
-    sf::Texture texture;
+    sf::Texture heroTexture;
+    sf::Sprite heroSprite;
 };
 
 class AIUnits : public Units {
@@ -98,7 +107,9 @@ class FriendlySoldier : public AIUnits {
     FriendlySoldier() {
         HP = 100;
         DMG = 20;
-        texture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/FriendlySoldier.png");
+        friendlySoldierTexture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/FriendlySoldier.png");
+        friendlySoldierSprite.setTexture(friendlySoldierTexture);
+        friendlySoldierSprite.setPosition(0, 0);
     }
 
     FriendlySoldier(int HP, int DMG, float coordinateX, float coordinateY) {
@@ -106,12 +117,19 @@ class FriendlySoldier : public AIUnits {
         this->DMG = DMG;
         this->coordinateX = coordinateX;
         this->coordinateY = coordinateY;
-        texture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/FriendlySoldier.png");
+        friendlySoldierTexture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/FriendlySoldier.png");
+        friendlySoldierSprite.setTexture(friendlySoldierTexture);
+        friendlySoldierSprite.setPosition(coordinateX, coordinateY);
+    }
+
+    sf::Sprite getSprite() {
+        return friendlySoldierSprite;
     }
 
     protected:
 
-    sf::Texture texture;
+    sf::Texture friendlySoldierTexture;
+    sf::Sprite friendlySoldierSprite;
 };
 
 class EnemySoldier : public AIUnits {
@@ -120,7 +138,9 @@ class EnemySoldier : public AIUnits {
     EnemySoldier() {
         HP = 100;
         DMG = 20;
-        texture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier.png");
+        enemySoldierTexture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier.png");
+        enemySoldierSprite.setTexture(enemySoldierTexture);
+        enemySoldierSprite.setPosition(0, 0);
     }
 
     EnemySoldier(int HP, int DMG, float coordinateX, float coordinateY) {
@@ -128,12 +148,19 @@ class EnemySoldier : public AIUnits {
         this->DMG = DMG;
         this->coordinateX = coordinateX;
         this->coordinateY = coordinateY;
-        texture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier.png");
+        enemySoldierTexture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier.png");
+        enemySoldierSprite.setTexture(enemySoldierTexture);
+        enemySoldierSprite.setPosition(coordinateX, coordinateY);
+    }
+
+    sf::Sprite getSprite() {
+        return enemySoldierSprite;
     }
 
     protected:
 
-    sf::Texture texture;
+    sf::Texture enemySoldierTexture;
+    sf::Sprite enemySoldierSprite;
 };
 
 class EnemySniper : public AIUnits {
@@ -142,7 +169,9 @@ class EnemySniper : public AIUnits {
     EnemySniper() {
         HP = 100;
         DMG = 20;
-        texture.loadFromFile("../../sprites/tds-modern-soldiers-and-vehicles-sprites-2/Sniper.png");
+        enemySniperTexture.loadFromFile("../../sprites/tds-modern-soldiers-and-vehicles-sprites-2/Sniper.png");
+        enemySniperSprite.setTexture(enemySniperTexture);
+        enemySniperSprite.setPosition(0, 0);
     }
 
     EnemySniper(int HP, int DMG, float coordinateX, float coordinateY) {
@@ -150,12 +179,19 @@ class EnemySniper : public AIUnits {
         this->DMG = DMG;
         this->coordinateX = coordinateX;
         this->coordinateY = coordinateY;
-        texture.loadFromFile("../../sprites/tds-modern-soldiers-and-vehicles-sprites-2/Sniper.png");
+        enemySniperTexture.loadFromFile("../../sprites/tds-modern-soldiers-and-vehicles-sprites-2/Sniper.png");
+        enemySniperSprite.setTexture(enemySniperTexture);
+        enemySniperSprite.setPosition(coordinateX, coordinateY);
+    }
+
+    sf::Sprite getSprite() {
+        return enemySniperSprite;
     }
 
     protected:
 
-    sf::Texture texture;
+    sf::Texture enemySniperTexture;
+    sf::Sprite enemySniperSprite;
 };
 
 class Boss : public AIUnits {
@@ -164,7 +200,9 @@ class Boss : public AIUnits {
     Boss() {
         HP = 1000;
         DMG = 25;
-        texture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/BTR/BTR.png");
+        bossTexture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/BTR/BTR.png");
+        this->bossSprite.setTexture(bossTexture);
+        bossSprite.setPosition(0, 0);
     }
 
     Boss(int HP, int DMG, float coordinateX, float coordinateY) {
@@ -172,12 +210,20 @@ class Boss : public AIUnits {
         this->DMG = DMG;
         this->coordinateX = coordinateX;
         this->coordinateY = coordinateY;
-        this->texture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/BTR/BTR.png");
+        bossTexture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/BTR/BTR.png");
+        bossSprite.setTexture(bossTexture);
+        bossSprite.setPosition(coordinateX, coordinateY);
     }
+
+    sf::Sprite getSprite() {
+        return bossSprite;
+    }
+    
 
     protected:
 
-    sf::Texture texture;
+    sf::Texture bossTexture;
+    sf::Sprite bossSprite;
 };
 
 #endif //  UNITS_H_
