@@ -5,21 +5,13 @@
 #include <iostream>
 
 class Structures {
-    private:
-
     public:
+
+    private:
 };
 
 class Units {
     public:
-
-        int GetHP();
-        int GetDMG();
-
-        float GetCoordX();
-        float GetCoordY();
-
-        std::string GetName();
 
         Units() {
         
@@ -28,6 +20,14 @@ class Units {
         ~Units() {
 
         }
+
+        int GetHP();
+        int GetDMG();
+
+        float GetCoordX();
+        float GetCoordY();
+
+        std::string GetName();
 
     protected:
 

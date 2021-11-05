@@ -1,8 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "units.h"
+#include "field.h"
 
 int main() {
+	Field GameField;
+
 	Hero Allan(300, 30, 100, 100);
 	FriendlySoldier SoldierF1(300, 30, 50, 50);
 	EnemySoldier SoldierE1(300, 30, 150, 150);
@@ -14,7 +17,7 @@ int main() {
 	std::cout << Allan.GetCoordX() << std::endl;
     std::cout << Allan.GetCoordY() << std::endl;
 
-	sf::RenderWindow window(sf::VideoMode(1000, 800), "Game");
+	sf::RenderWindow window(sf::VideoMode(GameField.GetFieldCoordX(), GameField.GetFiledCoordY()), "Game");
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
  
@@ -28,6 +31,7 @@ int main() {
 		}
 
 		window.clear();
+		GameField.SetFiled(window);
 		window.draw(Allan.getSprite());
 		window.draw(SoldierF1.getSprite());
 		window.draw(SoldierE1.getSprite());
