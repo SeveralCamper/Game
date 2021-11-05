@@ -107,7 +107,7 @@ class FriendlySoldier : public AIUnits {
     FriendlySoldier() {
         HP = 100;
         DMG = 20;
-        friendlySoldierTexture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/FriendlySoldier.png");
+        friendlySoldierTexture.loadFromFile("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/FriendlySoldier.png");
         friendlySoldierSprite.setTexture(friendlySoldierTexture);
         friendlySoldierSprite.setPosition(0, 0);
     }
@@ -117,7 +117,7 @@ class FriendlySoldier : public AIUnits {
         this->DMG = DMG;
         this->coordinateX = coordinateX;
         this->coordinateY = coordinateY;
-        friendlySoldierTexture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/FriendlySoldier.png");
+        friendlySoldierTexture.loadFromFile("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/FriendlySoldier.png");
         friendlySoldierSprite.setTexture(friendlySoldierTexture);
         friendlySoldierSprite.setPosition(coordinateX, coordinateY);
     }
@@ -138,7 +138,7 @@ class EnemySoldier : public AIUnits {
     EnemySoldier() {
         HP = 100;
         DMG = 20;
-        enemySoldierTexture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier.png");
+        enemySoldierTexture.loadFromFile("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/Soldier.png");
         enemySoldierSprite.setTexture(enemySoldierTexture);
         enemySoldierSprite.setPosition(0, 0);
     }
@@ -148,7 +148,7 @@ class EnemySoldier : public AIUnits {
         this->DMG = DMG;
         this->coordinateX = coordinateX;
         this->coordinateY = coordinateY;
-        enemySoldierTexture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier.png");
+        enemySoldierTexture.loadFromFile("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/Soldier.png");
         enemySoldierSprite.setTexture(enemySoldierTexture);
         enemySoldierSprite.setPosition(coordinateX, coordinateY);
     }
@@ -169,7 +169,7 @@ class EnemySniper : public AIUnits {
     EnemySniper() {
         HP = 100;
         DMG = 20;
-        enemySniperTexture.loadFromFile("../../sprites/tds-modern-soldiers-and-vehicles-sprites-2/Sniper.png");
+        enemySniperTexture.loadFromFile("sprites/tds-modern-soldiers-and-vehicles-sprites-2/Sniper/Sniper.png");
         enemySniperSprite.setTexture(enemySniperTexture);
         enemySniperSprite.setPosition(0, 0);
     }
@@ -179,7 +179,7 @@ class EnemySniper : public AIUnits {
         this->DMG = DMG;
         this->coordinateX = coordinateX;
         this->coordinateY = coordinateY;
-        enemySniperTexture.loadFromFile("../../sprites/tds-modern-soldiers-and-vehicles-sprites-2/Sniper.png");
+        enemySniperTexture.loadFromFile("sprites/tds-modern-soldiers-and-vehicles-sprites-2/Sniper/Sniper.png");
         enemySniperSprite.setTexture(enemySniperTexture);
         enemySniperSprite.setPosition(coordinateX, coordinateY);
     }
@@ -200,7 +200,7 @@ class Boss : public AIUnits {
     Boss() {
         HP = 1000;
         DMG = 25;
-        bossTexture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/BTR/BTR.png");
+        bossTexture.loadFromFile("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/BTR/BTR.png");
         this->bossSprite.setTexture(bossTexture);
         bossSprite.setPosition(0, 0);
     }
@@ -210,7 +210,7 @@ class Boss : public AIUnits {
         this->DMG = DMG;
         this->coordinateX = coordinateX;
         this->coordinateY = coordinateY;
-        bossTexture.loadFromFile("../../sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/BTR/BTR.png");
+        bossTexture.loadFromFile("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/BTR/BTR.png");
         bossSprite.setTexture(bossTexture);
         bossSprite.setPosition(coordinateX, coordinateY);
     }

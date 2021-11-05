@@ -3,7 +3,11 @@
 #include "units.h"
 
 int main() {
-	Hero Allan(300, 30, 50, 50);
+	Hero Allan(300, 30, 100, 100);
+	FriendlySoldier SoldierF1(300, 30, 50, 50);
+	EnemySoldier SoldierE1(300, 30, 150, 150);
+	EnemySniper SniperE1(300, 30, 200, 200);
+	Boss BTR(1000, 100, 300, 300);
 
     std::cout << Allan.GetDMG() << std::endl;
     std::cout << Allan.GetHP() << std::endl;
@@ -25,6 +29,10 @@ int main() {
 
 		window.clear();
 		window.draw(Allan.getSprite());
+		window.draw(SoldierF1.getSprite());
+		window.draw(SoldierE1.getSprite());
+		window.draw(SniperE1.getSprite());
+		window.draw(BTR.getSprite());
 		window.display();
 	}
  
