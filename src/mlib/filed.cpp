@@ -99,4 +99,52 @@ void Environment::SetEnvironment(sf::RenderWindow& window) {
     house01Sprite.setPosition(825, 100);
     house01Sprite.setScale(sf::Vector2f(1.5,1.5));
     window.draw(house01Sprite);
+
+    tree02Sprite.setPosition(10, 410);
+    window.draw(tree02Sprite);
+
+
+    tree01Sprite.setPosition(100, 300);
+    window.draw(tree01Sprite);
+
+    tree01Sprite.setPosition(20, 130);
+    tree01Sprite.setRotation(30);
+    window.draw(tree01Sprite);
+
+    tree01Sprite.setPosition(1400, 20);
+    window.draw(tree01Sprite);
+
+    tree01Sprite.setPosition(1550, 150);
+    window.draw(tree01Sprite);
+
+    tree01Sprite.setPosition(1300, 330);
+    window.draw(tree01Sprite);
+
+    tree01_1Sprite.setPosition(1800, 230);
+    tree01_1Sprite.setRotation(65);
+    window.draw(tree01_1Sprite);
+
+    tree01_1Sprite.setPosition(400, 0);
+    window.draw(tree01_1Sprite);
+
+    tree02Sprite.setPosition(20, 20);
+    window.draw(tree02Sprite);
+
+    tree02Sprite.setPosition(210, 0);
+    window.draw(tree02Sprite);
+
+    tree02Sprite.setPosition(1510, 800);
+    window.draw(tree02Sprite);
+
+    tree02Sprite.setPosition(550, 150);
+    window.draw(tree02Sprite);
+
+    tree02Sprite.setPosition(210, 0);
+    window.draw(tree02Sprite);
+
+    tree02Sprite.setPosition(210, 0);
+    window.draw(tree02Sprite);
+
+    tree02Sprite.setPosition(210, 0);
+    window.draw(tree02Sprite);
 }

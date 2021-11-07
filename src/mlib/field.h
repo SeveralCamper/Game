@@ -63,6 +63,15 @@ class Environment {
 
         house01Texture.loadFromFile("sprites/tds-modern-tilesets-environment/House/TDS04_0000_House01.png");
         house01Sprite.setTexture(house01Texture);
+
+        tree01Texture.loadFromFile("sprites/tds-modern-tilesets-environment/Trees Bushes/TDS04_0022_Tree1.png");
+        tree01Sprite.setTexture(tree01Texture);
+
+        tree01_1Texture.loadFromFile("sprites/tds-modern-tilesets-environment/Trees Bushes/TDS04_0022_Tree1.png");
+        tree01_1Sprite.setTexture(tree01_1Texture);
+
+        tree02Texture.loadFromFile("sprites/tds-modern-tilesets-environment/Trees Bushes/TDS04_0021_Tree2.png");
+        tree02Sprite.setTexture(tree02Texture);
     }
 
     ~Environment() {
@@ -73,20 +82,20 @@ class Environment {
 
     private:
 
+        sf::Texture tree01Texture;
+        sf::Sprite tree01Sprite;
+
+        sf::Texture tree01_1Texture;
+        sf::Sprite tree01_1Sprite;
+
+        sf::Texture tree02Texture;
+        sf::Sprite tree02Sprite;
+
         sf::Texture house01Texture;
         sf::Sprite house01Sprite;
 
         sf::Texture bridge02Texture;
         sf::Sprite bridge02Sprite;
-
-        sf::Texture dirtTexture;
-        sf::Sprite dirtSprite;
-
-        sf::Texture sandTexture;
-        sf::Sprite sandSprite;
-
-        sf::Texture grassTexture;
-        sf::Sprite grassSprite;
 };
 
 #endif //  FILED_H_
