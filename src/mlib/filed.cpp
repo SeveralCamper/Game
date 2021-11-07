@@ -117,7 +117,7 @@ void Environment::SetEnvironment(sf::RenderWindow& window) {
     tree01Sprite.setPosition(1550, 150);
     window.draw(tree01Sprite);
 
-    tree01Sprite.setPosition(1300, 330);
+    tree01Sprite.setPosition(1260, 230);
     window.draw(tree01Sprite);
 
     tree01_1Sprite.setPosition(1800, 230);
@@ -147,4 +147,43 @@ void Environment::SetEnvironment(sf::RenderWindow& window) {
 
     tree02Sprite.setPosition(210, 0);
     window.draw(tree02Sprite);
+
+    tree03Sprite.setPosition(990, 320);
+    tree03Sprite.setScale(sf::Vector2f(1.5,1.5));
+    window.draw(tree03Sprite);
+
+    tree03_1Sprite.setPosition(190, 810);
+    tree03_1Sprite.setRotation(170);
+    window.draw(tree03_1Sprite);
+
+    tree03_1Sprite.setPosition(1700, 210);
+    window.draw(tree03_1Sprite);
+
+    tree03_1Sprite.setPosition(1850, 130);
+    window.draw(tree03_1Sprite);
+
+    tree03_1Sprite.setPosition(1760, 790);
+    window.draw(tree03_1Sprite);
+
+    bush01Sprite.setPosition(1310, 200);
+    bush01Sprite.setScale(sf::Vector2f(1.5,1.5));
+    window.draw(bush01Sprite);
+
+    bush01Sprite.setPosition(320, 385);
+    window.draw(bush01Sprite);
+
+    bush01Sprite.setPosition(670, 760);
+    window.draw(bush01Sprite);
+
+    bush01Sprite.setPosition(1090, 840);
+    window.draw(bush01Sprite);
+
+    bush02Sprite.setPosition(1750, 800);
+    window.draw(bush02Sprite);
+
+    bush02Sprite.setPosition(1500, 40);
+    window.draw(bush02Sprite);
+
+    bush02Sprite.setPosition(150, 100);
+    window.draw(bush02Sprite);
 }
