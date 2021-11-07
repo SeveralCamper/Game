@@ -92,7 +92,11 @@ void Field::SetFiled(sf::RenderWindow &window)
 }
 
 void Environment::SetEnvironment(sf::RenderWindow& window) {
-    bridge02Sprite.setPosition(500, 600);
-    bridge02Sprite.~Transformable. scale()
+    bridge02Sprite.setPosition(850, 460);
+    bridge02Sprite.setScale(sf::Vector2f(1.5,1.5));
     window.draw(bridge02Sprite);
+
+    house01Sprite.setPosition(825, 100);
+    house01Sprite.setScale(sf::Vector2f(1.5,1.5));
+    window.draw(house01Sprite);
 }

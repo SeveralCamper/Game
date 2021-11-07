@@ -9,7 +9,7 @@ int main() {
 	Environment Item;
 
 	Hero Allan(300, 30, 100, 100);
-	FriendlySoldier SoldierF1(300, 30, 50, 50);
+	FriendlySoldier SoldierF1(300, 30, 900, 200);
 	EnemySoldier SoldierE1(300, 30, 150, 150);
 	EnemySniper SniperE1(300, 30, 200, 200);
 	Boss BTR(1000, 100, 300, 300);
@@ -34,12 +34,12 @@ int main() {
 
 		window.clear();
 		GameField.SetFiled(window);
-		Item.SetEnvironment(window);
 		window.draw(Allan.getSprite());
-		window.draw(SoldierF1.getSprite());
 		window.draw(SoldierE1.getSprite());
 		window.draw(SniperE1.getSprite());
 		window.draw(BTR.getSprite());
+		Item.SetEnvironment(window);
+		window.draw(SoldierF1.getSprite());
 		window.display();
 	}
  
