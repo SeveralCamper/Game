@@ -9,12 +9,12 @@ int main()
 
 	Environment Item;
 
-	sf::RenderWindow window(sf::VideoMode(GameField.GetFieldCoordX(), GameField.GetFiledCoordY()), "Game");
+	sf::RenderWindow window(sf::VideoMode(GameField.GetFieldXSize(), GameField.GetFieldYSize()), "Game");
 	
 	float CurrentFrame = 0; //  Xранит текущий кадр
 	sf::Clock clock;
  
-	Object Player("sprites/tds-modern-hero-weapons-and-props/Hero_Pistol/Hero_Pistol.png",250,250, 64, 64);
+	Units Player("sprites/tds-modern-hero-weapons-and-props/Hero_Pistol/Hero_Pistol.png", 250, 250);
  
 	while (window.isOpen())
 	{
@@ -32,29 +32,36 @@ int main()
 		}
  
 		//  CHARACTER CONTROL
-
 		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || (sf::Keyboard::isKeyPressed(sf::Keyboard::A)))) {
-			Player.setDirection(1); Player.setSPeed(0.1); //  направление вверх
-			CurrentFrame += 0.005*time;
-			if (CurrentFrame > 3) CurrentFrame -= 3; 
+			if (Player.getCoordX() - 5 > 0) {
+				Player.setDirection(1); Player.setSPeed(0.1); //  направление влево
+				CurrentFrame += 0.005*time;
+				if (CurrentFrame > 3) CurrentFrame -= 3; 
+			}
 		}
  
 		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || (sf::Keyboard::isKeyPressed(sf::Keyboard::D)))) {
-			Player.setDirection(0); Player.setSPeed(0.1); //  направление вправо
-			CurrentFrame += 0.005*time;
-			if (CurrentFrame > 3) CurrentFrame -= 3; 
+			if (Player.getCoordX() + 5 < 1810) {
+				Player.setDirection(0); Player.setSPeed(0.1); //  направление вправо
+				CurrentFrame += 0.005*time;
+				if (CurrentFrame > 3) CurrentFrame -= 3; 
+			}
 		}
  
-		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || (sf::Keyboard::isKeyPressed(sf::Keyboard::W)))) { 
-			Player.setDirection(3); Player.setSPeed(0.1); //  направление вниз
+		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || (sf::Keyboard::isKeyPressed(sf::Keyboard::W)))) {
+			if (Player.getCoordY() + 5 > 0) {
+			Player.setDirection(3); Player.setSPeed(0.1); //  направление вверх
 			CurrentFrame += 0.005*time;
 			if (CurrentFrame > 3) CurrentFrame -= 3;
+			}
 		}	
  
 		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || (sf::Keyboard::isKeyPressed(sf::Keyboard::S)))) {
+			if (Player.getCoordY() - 5 < 840) {
 			Player.setDirection(2); Player.setSPeed(0.1); //  направление вниз
 			CurrentFrame += 0.005*time; //  служит для прохождения по "кадрам". переменная доходит до трех суммируя произведение времени и скорости. изменив 0.005 можно изменить скорость анимации
 			if (CurrentFrame > 3) CurrentFrame -= 3;
+			}
 		}
  
 		Player.update(time); //  оживляем объект p класса Player с помощью времени sfml, передавая время в качестве параметра функции update. благодаря этому персонаж может двигаться

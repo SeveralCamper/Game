@@ -1,11 +1,11 @@
 #include "field.h"
 
-float Field::GetFieldCoordX()
+float Field::GetFieldXSize()
 {
     return fieldXSize;
 }
 
-float Field::GetFiledCoordY()
+float Field::GetFieldYSize()
 {
     return fieldYSize;
 }

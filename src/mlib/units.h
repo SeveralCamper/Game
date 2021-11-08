@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+// PARENTAL ABSTRACT OBJECT CLASS
+
 class Object { // родительский класс объектов
     public:
         Object() {
@@ -14,19 +16,10 @@ class Object { // родительский класс объектов
 
         }
 
-        Object(sf::String filePath, float coordX, float coordY, float width, float hight) {
-            this->filePath = filePath;
-            this->width = width; this->hight = hight;
-            image.loadFromFile(this->filePath);
-            texture.loadFromImage(image);
-            sprite.setTexture(texture);
-            this->coordX = coordX; this->coordY = coordY;
-        }
+        virtual std::string getObjectName() = 0;
 
         float getCoordX();
         float getCoordY();
-        float getWidth();
-        float getHight();
         float getDirectionX();
         float getDirectionY();
         float getSPeed();
@@ -35,8 +28,6 @@ class Object { // родительский класс объектов
 
         void setCoordX(float coordX);
         void setCoordY(float coordY);
-        void setWidth(float width);
-        void setHight(float hight);
         void setDirectionX(float directionX);
         void setDirectionY(float directionY);
         void setSPeed(float speed);
@@ -45,9 +36,13 @@ class Object { // родительский класс объектов
 
         void update(float time);
  
-    private:
-        float coordX, coordY, width, hight, directionX, directionY, speed = 0;
-        int direction = 0;
+    protected:
+        float coordX, coordY, directionX, directionY, speed = 0;
+
+        int HP, DMG, direction = 0;
+
+        std::string objectName;
+
         sf::String filePath;
         sf::Image image;
         sf::Texture texture;
@@ -55,43 +50,42 @@ class Object { // родительский класс объектов
 
 };
 
-/*class Structures {
+// STRUCTURES CLASS
+
+class Structures : public Object {
     public:
 
     private:
 };
 
-class Units {
+// UNITS CLASS
+
+class Units : public Object {
     public:
 
         Units() {
         
         }
 
+        Units(sf::String filePath, float coordX, float coordY) {
+            this->filePath = filePath;
+            image.loadFromFile(this->filePath);
+            texture.loadFromImage(image);
+            sprite.setTexture(texture);
+            this->coordX = coordX; this->coordY = coordY;
+        }
+
         ~Units() {
 
         }
 
-        int GetHP();
-        int GetDMG();
-
-        float GetCoordX();
-        float GetCoordY();
-
-        std::string GetName();
+    std::string getObjectName() override;
 
     protected:
 
-        float coordinateX;
-        float coordinateY;
-
-        int HP;
-        int DMG;
-        std::string unitName;
-
 };
 
-class PlayerUnits : public Units {
+/* class PlayerUnits : public Units {
     public:
 
     PlayerUnits() {

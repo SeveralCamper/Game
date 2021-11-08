@@ -1,5 +1,7 @@
 #include "units.h"
 
+// PARENTAL ABSTRACT OBJECT CLASS
+
 void Object::update(float time) {
     switch (direction) {
         case 0: directionX = speed; directionY = 0;   break; //  движение вправо
@@ -23,18 +25,14 @@ float Object::getCoordY() {
     return coordY;
 }
 
-float Object::getWidth() {
-    return width;
-}
-float Object::getHight() {
-    return hight;
-}
 float Object::getDirectionX() {
     return directionX;
 }
+
 float Object::getDirectionY() {
     return directionY;
 }
+
 float Object::getSPeed() {
     return speed;
 }
@@ -51,14 +49,6 @@ void Object::setCoordY(float coordY) {
     this->coordY = coordY;
 }
 
-void Object::setWidth(float width) {
-    this->width = width;
-}
-
-void Object::setHight(float hight) {
-    this->hight = hight;
-}
-
 void Object::setDirectionX(float directionX) {
     this->directionX = directionX;
 }
@@ -73,4 +63,10 @@ void Object::setSPeed(float speed) {
 
 void Object::setDirection(int direction) {
     this->direction = direction;
+}
+
+// UNITS CLASS
+
+std::string Units::getObjectName() {
+    return objectName;
 }

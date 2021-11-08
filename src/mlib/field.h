@@ -34,8 +34,8 @@ class Field {
 
     void SetFiled(sf::RenderWindow& window);
 
-    float GetFieldCoordX();
-    float GetFiledCoordY();
+    float GetFieldXSize();
+    float GetFieldYSize();
 
     private:
 
