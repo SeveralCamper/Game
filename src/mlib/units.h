@@ -4,7 +4,58 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-class Structures {
+class Object { // родительский класс объектов
+    public:
+        Object() {
+
+        }
+
+        ~Object() {
+
+        }
+
+        Object(sf::String filePath, float coordX, float coordY, float width, float hight) {
+            this->filePath = filePath;
+            this->width = width; this->hight = hight;
+            image.loadFromFile(this->filePath);
+            texture.loadFromImage(image);
+            sprite.setTexture(texture);
+            this->coordX = coordX; this->coordY = coordY;
+        }
+
+        float getCoordX();
+        float getCoordY();
+        float getWidth();
+        float getHight();
+        float getDirectionX();
+        float getDirectionY();
+        float getSPeed();
+
+        sf::Sprite getSPrite();
+
+        void setCoordX(float coordX);
+        void setCoordY(float coordY);
+        void setWidth(float width);
+        void setHight(float hight);
+        void setDirectionX(float directionX);
+        void setDirectionY(float directionY);
+        void setSPeed(float speed);
+
+        void setDirection(int direction);
+
+        void update(float time);
+ 
+    private:
+        float coordX, coordY, width, hight, directionX, directionY, speed = 0;
+        int direction = 0;
+        sf::String filePath;
+        sf::Image image;
+        sf::Texture texture;
+        sf::Sprite sprite;
+
+};
+
+/*class Structures {
     public:
 
     private:
@@ -224,6 +275,6 @@ class Boss : public AIUnits {
 
     sf::Texture bossTexture;
     sf::Sprite bossSprite;
-};
+}; */
 
 #endif //  UNITS_H_
