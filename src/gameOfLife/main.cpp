@@ -9,7 +9,7 @@ int main() {
 	Environment Item;
 
 	Hero Allan(300, 30, 100, 100);
-	FriendlySoldier SoldierF1(300, 30, 900, 200);
+	FriendlySoldier SoldierF1(300, 30, 875, 235);
 	EnemySoldier SoldierE1(300, 30, 150, 150);
 	EnemySniper SniperE1(300, 30, 200, 200);
 	Boss BTR(1000, 100, 300, 300);
