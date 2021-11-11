@@ -38,8 +38,6 @@ class Object { // родительский класс объектов
         void setSpriteRotation(int spriteRotation);
 
         void update(float time);
-
-        sf::Sprite sprite;
  
     protected:
         float coordX, coordY, directionX, directionY, speed = 0;
@@ -47,7 +45,7 @@ class Object { // родительский класс объектов
         int HP, DMG, spriteRotation = 0, direction = 0;
 
         std::string objectName;
-
+        sf::Sprite sprite;
         sf::String filePath;
         sf::Image image;
         sf::Texture texture;

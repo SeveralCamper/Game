@@ -153,6 +153,7 @@ class Environment {
     }
 
     void SetEnvironment(sf::RenderWindow& window);
+    void SetEnvironmentTrees(sf::RenderWindow& window);
 
     private:
 

@@ -102,13 +102,7 @@ void Field::SetFiled(sf::RenderWindow &window)
     window.draw(dirtRoadSprite);
 }
 
-void Environment::SetEnvironment(sf::RenderWindow& window) {
-    // BRIGE
-
-    bridge02Sprite.setPosition(850, 460);
-    bridge02Sprite.setScale(sf::Vector2f(1.5,1.5));
-    window.draw(bridge02Sprite);
-
+void Environment::SetEnvironmentTrees(sf::RenderWindow& window) {
     // HOUSE
 
     house01Sprite.setPosition(825, 100);
@@ -150,60 +144,6 @@ void Environment::SetEnvironment(sf::RenderWindow& window) {
 
     bush03Sprite.setPosition(500, 465);
     window.draw(bush03Sprite);
-
-    // ROCKS
-
-    rock01Sprite.setPosition(580, 50);
-    window.draw(rock01Sprite);
-
-    rock01Sprite.setPosition(1560, 400);
-    window.draw(rock01Sprite);
-
-    rock01_1Sprite.setPosition(300, 780);
-    rock01_1Sprite.setRotation(140);
-    window.draw(rock01_1Sprite);
-
-    rock02Sprite.setPosition(1240, 10);
-    window.draw(rock02Sprite);
-
-    rock02Sprite.setPosition(1590, 830);
-    window.draw(rock02Sprite);
-
-    rock03Sprite.setPosition(820, 860);
-    window.draw(rock03Sprite);
-
-    rock03Sprite.setPosition(20, 340);
-    window.draw(rock03Sprite);
-
-    rock04Sprite.setPosition(1740, 160);
-    rock04Sprite.setRotation(150);
-    window.draw(rock04Sprite);
-
-    rock05Sprite.setPosition(1340, 640);
-    rock05Sprite.setScale(sf::Vector2f(2,2));
-    window.draw(rock05Sprite);
-
-    // SANDBAGS
-
-    sandBag01Sprite.setPosition(720, 350);
-    window.draw(sandBag01Sprite);
-
-    sandBag01Sprite.setPosition(865, 262);
-    window.draw(sandBag01Sprite);
-
-    sandBag01Sprite.setPosition(900, 350);
-    window.draw(sandBag01Sprite);
-
-    sandBag02Sprite.setPosition(990, 350);
-    window.draw(sandBag02Sprite);
-
-    sandBag03Sprite.setPosition(1000, 800);
-    window.draw(sandBag03Sprite);
-
-    // DIED FS
-
-    diedFSSprite.setPosition(1013,778);
-    window.draw(diedFSSprite);
 
     // TREES
 
@@ -274,6 +214,71 @@ void Environment::SetEnvironment(sf::RenderWindow& window) {
     tree03_1Sprite.setPosition(1760, 790);
     window.draw(tree03_1Sprite);
 
+}
+
+void Environment::SetEnvironment(sf::RenderWindow& window) {
+    // BRIGE
+
+    bridge02Sprite.setPosition(850, 460);
+    bridge02Sprite.setScale(sf::Vector2f(1.5,1.5));
+    window.draw(bridge02Sprite);
+
+    // ROCKS
+
+    rock01Sprite.setPosition(580, 50);
+    window.draw(rock01Sprite);
+
+    rock01Sprite.setPosition(1560, 400);
+    window.draw(rock01Sprite);
+
+    rock01_1Sprite.setPosition(300, 780);
+    rock01_1Sprite.setRotation(140);
+    window.draw(rock01_1Sprite);
+
+    rock02Sprite.setPosition(1240, 10);
+    window.draw(rock02Sprite);
+
+    rock02Sprite.setPosition(1590, 830);
+    window.draw(rock02Sprite);
+
+    rock03Sprite.setPosition(820, 860);
+    window.draw(rock03Sprite);
+
+    rock03Sprite.setPosition(20, 340);
+    window.draw(rock03Sprite);
+
+    rock04Sprite.setPosition(1740, 160);
+    rock04Sprite.setRotation(150);
+    window.draw(rock04Sprite);
+
+    rock05Sprite.setPosition(1340, 640);
+    rock05Sprite.setScale(sf::Vector2f(2,2));
+    window.draw(rock05Sprite);
+
+    // SANDBAGS
+
+    sandBag01Sprite.setPosition(720, 350);
+    window.draw(sandBag01Sprite);
+
+    sandBag01Sprite.setPosition(865, 262);
+    window.draw(sandBag01Sprite);
+
+    sandBag01Sprite.setPosition(900, 350);
+    window.draw(sandBag01Sprite);
+
+    sandBag02Sprite.setPosition(990, 350);
+    window.draw(sandBag02Sprite);
+
+    sandBag03Sprite.setPosition(1000, 800);
+    window.draw(sandBag03Sprite);
+
+    // DIED FS
+
+    diedFSSprite.setPosition(1013,778);
+    window.draw(diedFSSprite);
+
+    // TREES
+
     tree04Sprite.setPosition(1780, 220);
     window.draw(tree04Sprite);
 
@@ -291,5 +296,4 @@ void Environment::SetEnvironment(sf::RenderWindow& window) {
 
     tree05Sprite.setPosition(410, 790);
     window.draw(tree05Sprite);
-
 }

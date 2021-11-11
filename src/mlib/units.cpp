@@ -51,6 +51,7 @@ sf::Texture Object::getTexture() {
 
 void Object::setSpriteRotation(int spriteRotation) {
     this->spriteRotation = spriteRotation;
+    sprite.setRotation(spriteRotation);
 }
 
 void Object::setCoordX(float coordX) {
