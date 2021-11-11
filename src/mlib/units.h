@@ -121,6 +121,7 @@ class Hero : public PlayerUnits {
         image.loadFromFile(this->filePath);
         texture.loadFromImage(image);
         sprite.setTexture(texture);
+        sprite.setOrigin(sf::Vector2f(8.5,14));
         this->coordX = coordX; this->coordY = coordY;
     }
 

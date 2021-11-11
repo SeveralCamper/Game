@@ -2,6 +2,7 @@
 #include <iostream>
 #include "units.h"
 #include "field.h"
+#include "settings.h"
 
 int main()
 {
@@ -34,9 +35,9 @@ int main()
  
 		//  CHARACTER CONTROL
 		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || (sf::Keyboard::isKeyPressed(sf::Keyboard::A)))) {
-			if (Player.getCoordX() - 5 > 0) {
-				if ((Player.getCoordY() > 440 && Player.getCoordY() < (650)) && ((Player.getCoordX() > 845 && Player.getCoordX() < 940))) {
-					if (Player.getCoordX() - 5 > 845) {
+			if (Player.getCoordX() - 2 > FIELD_LEFT_BOARD) {
+				if ((Player.getCoordY() > RIVER_TOP_FIELD && Player.getCoordY() < (RIVER_DOWN_FIELD)) && ((Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < 945))) {
+					if (Player.getCoordX() - 1 > BRIDGE_LEFT_BOARD) {
 						Player.setDirection(1); Player.setSPeed(0.1);
 						Player.sprite.setRotation(90);
 					}
@@ -48,9 +49,9 @@ int main()
 		}
  
 		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || (sf::Keyboard::isKeyPressed(sf::Keyboard::D)))) {
-			if (Player.getCoordX() + 5 < 1810) {
-				if ((Player.getCoordY() > 440 && Player.getCoordY() < (650)) && ((Player.getCoordX() > 845 && Player.getCoordX() < 940))) {
-					if (Player.getCoordX() + 5 < 940) {
+			if (Player.getCoordX() + 2 < FIELD_RIGHT_BOARD) {
+				if ((Player.getCoordY() > RIVER_TOP_FIELD && Player.getCoordY() < (RIVER_DOWN_FIELD)) && ((Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD))) {
+					if (Player.getCoordX() + 1 < BRIDGE_RIGHT_BOARD) {
 						Player.setDirection(0); Player.setSPeed(0.1);
 						Player.sprite.setRotation(270);
 					}
@@ -62,13 +63,13 @@ int main()
 		}
  
 		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || (sf::Keyboard::isKeyPressed(sf::Keyboard::W)))) {
-		if (Player.getCoordY() < 450 || (Player.getCoordX() > 845 && Player.getCoordX() < 940)) {
-			if (Player.getCoordY() + 5 > 0) {
+		if (Player.getCoordY() < (RIVER_TOP_FIELD + 1) || (Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD)) {
+			if (Player.getCoordY() + 2 > FIELD_TOP_BOARD) {
 				Player.setDirection(3); Player.setSPeed(0.1); //  направление вверх
 				Player.sprite.setRotation(180);
 				}
-			} else if (Player.getCoordY() > 670) {
-				if (Player.getCoordY() - 5 > 670) {
+			} else if (Player.getCoordY() > RIVER_DOWN_FIELD + 15) {
+				if (Player.getCoordY() - 2 > RIVER_DOWN_FIELD + 15) {
 					Player.setDirection(3); Player.setSPeed(0.1); //  направление вверх
 					Player.sprite.setRotation(180);
 				}
@@ -76,13 +77,13 @@ int main()
 		}	
  
 		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || (sf::Keyboard::isKeyPressed(sf::Keyboard::S)))) {
-			if (Player.getCoordY() < 450 || (Player.getCoordX() > 845 && Player.getCoordX() < 940)) {
-				if (Player.getCoordY() - 5 < 440 || ((Player.getCoordX() > 845 && Player.getCoordX() < 940) && (Player.getCoordY() - 5 < 840))) {
+			if (Player.getCoordY() < (RIVER_TOP_FIELD - 1) || (Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD)) {
+				if (Player.getCoordY() - 2 < RIVER_TOP_FIELD || ((Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD) && (Player.getCoordY() - 1 < FIELD_DOWN_BOARD))) {
 					Player.setDirection(2); Player.setSPeed(0.1); //  направление вниз
 					Player.sprite.setRotation(0);
 				}
-			} else if(Player.getCoordY() > 640) {
-				if (Player.getCoordY() - 5 < 840) {
+			} else if(Player.getCoordY() > RIVER_DOWN_FIELD) {
+				if (Player.getCoordY() - 2 < BRIDGE_LEFT_BOARD) {
 					Player.setDirection(2); Player.setSPeed(0.1); //  направление вниз
 					Player.sprite.setRotation(0);
 				}
