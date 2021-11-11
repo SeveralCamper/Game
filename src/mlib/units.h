@@ -18,35 +18,39 @@ class Object { // родительский класс объектов
 
         virtual std::string getObjectName() = 0;
 
+        int getSpriteRotation();
+
         float getCoordX();
         float getCoordY();
         float getDirectionX();
         float getDirectionY();
         float getSPeed();
 
-        sf::Sprite getSPrite();
+        sf::Sprite getSprite();
+        sf::Texture getTexture();
 
         void setCoordX(float coordX);
         void setCoordY(float coordY);
         void setDirectionX(float directionX);
         void setDirectionY(float directionY);
         void setSPeed(float speed);
-
         void setDirection(int direction);
+        void setSpriteRotation(int spriteRotation);
 
         void update(float time);
+
+        sf::Sprite sprite;
  
     protected:
         float coordX, coordY, directionX, directionY, speed = 0;
 
-        int HP, DMG, direction = 0;
+        int HP, DMG, spriteRotation = 0, direction = 0;
 
         std::string objectName;
 
         sf::String filePath;
         sf::Image image;
         sf::Texture texture;
-        sf::Sprite sprite;
 
 };
 
@@ -54,6 +58,24 @@ class Object { // родительский класс объектов
 
 class Structures : public Object {
     public:
+
+    Structures() {
+
+    }
+
+    Structures(sf::String filePath, float coordX, float coordY) {
+        this->filePath = filePath;
+        image.loadFromFile(this->filePath);
+        texture.loadFromImage(image);
+        sprite.setTexture(texture);
+        this->coordX = coordX; this->coordY = coordY;
+    }
+
+    ~Structures() {
+
+    }
+
+    std::string getObjectName() override;
 
     private:
 };
@@ -67,31 +89,22 @@ class Units : public Object {
         
         }
 
-        Units(sf::String filePath, float coordX, float coordY) {
-            this->filePath = filePath;
-            image.loadFromFile(this->filePath);
-            texture.loadFromImage(image);
-            sprite.setTexture(texture);
-            this->coordX = coordX; this->coordY = coordY;
-        }
-
         ~Units() {
 
         }
-
-    std::string getObjectName() override;
 
     protected:
 
 };
 
-/* class PlayerUnits : public Units {
+class PlayerUnits : public Units {
     public:
 
     PlayerUnits() {
-        HP = 100;
-        DMG = 20;
+
     }
+
+    std::string getObjectName() override;
 
     protected:
 };
@@ -100,47 +113,33 @@ class Hero : public PlayerUnits {
     public:
 
     Hero() {
-        HP = 300;
-        DMG = 30;
-        heroTexture.loadFromFile("sprites/tds-modern-hero-weapons-and-props/Hero_Pistol/Hero_Pistol.png");
-        heroSprite.setTexture(heroTexture);
-        heroSprite.setPosition(0, 0);
     }
 
-    Hero(int HP, int DMG, float coordinateX, float coordinateY) {
-        this->HP = HP;
-        this->DMG = DMG;
-        this->coordinateX = coordinateX;
-        this->coordinateY = coordinateY;
-        heroTexture.loadFromFile("sprites/tds-modern-hero-weapons-and-props/Hero_Pistol/Hero_Pistol.png");
-        heroSprite.setTexture(heroTexture);
-        heroSprite.setPosition(coordinateX, coordinateY);
-    }
-
-    sf::Sprite getSprite() {
-        return heroSprite;
+    Hero(sf::String filePath, float coordX, float coordY) {
+        this->filePath = filePath;
+        sprite.setRotation(180);
+        image.loadFromFile(this->filePath);
+        texture.loadFromImage(image);
+        sprite.setTexture(texture);
+        this->coordX = coordX; this->coordY = coordY;
     }
 
     protected:
 
-    sf::Texture heroTexture;
-    sf::Sprite heroSprite;
 };
 
 class AIUnits : public Units {
     public:
 
     AIUnits() {
-        HP = 100;
-        DMG = 20;
+
     }
 
-    AIUnits(int HP, int DMG, float coordinateX, float coordinateY) {
-        this->HP = HP;
-        this->DMG = DMG;
-        this->coordinateX = coordinateX;
-        this->coordinateY = coordinateY;
+    ~AIUnits() {
+
     }
+
+    std::string getObjectName() override;
 
     protected:
 
@@ -150,125 +149,77 @@ class FriendlySoldier : public AIUnits {
     public:
 
     FriendlySoldier() {
-        HP = 100;
-        DMG = 20;
-        friendlySoldierTexture.loadFromFile("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/FriendlySoldier.png");
-        friendlySoldierSprite.setTexture(friendlySoldierTexture);
-        friendlySoldierSprite.setPosition(0, 0);
+
     }
 
-    FriendlySoldier(int HP, int DMG, float coordinateX, float coordinateY) {
-        this->HP = HP;
-        this->DMG = DMG;
-        this->coordinateX = coordinateX;
-        this->coordinateY = coordinateY;
-        friendlySoldierTexture.loadFromFile("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/FriendlySoldier.png");
-        friendlySoldierSprite.setTexture(friendlySoldierTexture);
-        friendlySoldierSprite.setPosition(coordinateX, coordinateY);
-    }
-
-    sf::Sprite getSprite() {
-        return friendlySoldierSprite;
+    FriendlySoldier(sf::String filePath, float coordX, float coordY) {
+        this->filePath = filePath;
+        image.loadFromFile(this->filePath);
+        texture.loadFromImage(image);
+        sprite.setTexture(texture);
+        this->coordX = coordX; this->coordY = coordY;
     }
 
     protected:
 
-    sf::Texture friendlySoldierTexture;
-    sf::Sprite friendlySoldierSprite;
 };
 
 class EnemySoldier : public AIUnits {
     public:
 
     EnemySoldier() {
-        HP = 100;
-        DMG = 20;
-        enemySoldierTexture.loadFromFile("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/Soldier.png");
-        enemySoldierSprite.setTexture(enemySoldierTexture);
-        enemySoldierSprite.setPosition(0, 0);
+
     }
 
-    EnemySoldier(int HP, int DMG, float coordinateX, float coordinateY) {
-        this->HP = HP;
-        this->DMG = DMG;
-        this->coordinateX = coordinateX;
-        this->coordinateY = coordinateY;
-        enemySoldierTexture.loadFromFile("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/Soldier.png");
-        enemySoldierSprite.setTexture(enemySoldierTexture);
-        enemySoldierSprite.setPosition(coordinateX, coordinateY);
-    }
-
-    sf::Sprite getSprite() {
-        return enemySoldierSprite;
+    EnemySoldier(sf::String filePath, float coordX, float coordY) {
+        this->filePath = filePath;
+        image.loadFromFile(this->filePath);
+        texture.loadFromImage(image);
+        sprite.setTexture(texture);
+        this->coordX = coordX; this->coordY = coordY;
     }
 
     protected:
 
-    sf::Texture enemySoldierTexture;
-    sf::Sprite enemySoldierSprite;
 };
 
 class EnemySniper : public AIUnits {
     public:
 
     EnemySniper() {
-        HP = 100;
-        DMG = 20;
-        enemySniperTexture.loadFromFile("sprites/tds-modern-soldiers-and-vehicles-sprites-2/Sniper/Sniper.png");
-        enemySniperSprite.setTexture(enemySniperTexture);
-        enemySniperSprite.setPosition(0, 0);
+
     }
 
-    EnemySniper(int HP, int DMG, float coordinateX, float coordinateY) {
-        this->HP = HP;
-        this->DMG = DMG;
-        this->coordinateX = coordinateX;
-        this->coordinateY = coordinateY;
-        enemySniperTexture.loadFromFile("sprites/tds-modern-soldiers-and-vehicles-sprites-2/Sniper/Sniper.png");
-        enemySniperSprite.setTexture(enemySniperTexture);
-        enemySniperSprite.setPosition(coordinateX, coordinateY);
-    }
-
-    sf::Sprite getSprite() {
-        return enemySniperSprite;
+    EnemySniper(sf::String filePath, float coordX, float coordY) {
+        this->filePath = filePath;
+        image.loadFromFile(this->filePath);
+        texture.loadFromImage(image);
+        sprite.setTexture(texture);
+        this->coordX = coordX; this->coordY = coordY;
     }
 
     protected:
 
-    sf::Texture enemySniperTexture;
-    sf::Sprite enemySniperSprite;
 };
 
 class Boss : public AIUnits {
     public:
 
     Boss() {
-        HP = 1000;
-        DMG = 25;
-        bossTexture.loadFromFile("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/BTR/BTR.png");
-        this->bossSprite.setTexture(bossTexture);
-        bossSprite.setPosition(0, 0);
+
     }
 
-    Boss(int HP, int DMG, float coordinateX, float coordinateY) {
-        this->HP = HP;
-        this->DMG = DMG;
-        this->coordinateX = coordinateX;
-        this->coordinateY = coordinateY;
-        bossTexture.loadFromFile("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/BTR/BTR.png");
-        bossSprite.setTexture(bossTexture);
-        bossSprite.setPosition(coordinateX, coordinateY);
-    }
-
-    sf::Sprite getSprite() {
-        return bossSprite;
+    Boss(sf::String filePath, float coordX, float coordY) {
+        this->filePath = filePath;
+        image.loadFromFile(this->filePath);
+        texture.loadFromImage(image);
+        sprite.setTexture(texture);
+        this->coordX = coordX; this->coordY = coordY;
     }
     
 
     protected:
 
-    sf::Texture bossTexture;
-    sf::Sprite bossSprite;
-}; */
+};
 
 #endif //  UNITS_H_

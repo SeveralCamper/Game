@@ -17,6 +17,10 @@ void Object::update(float time) {
     sprite.setPosition(coordX,coordY);
 }
 
+int Object::getSpriteRotation() {
+    return spriteRotation;
+}
+
 float Object::getCoordX() {
     return coordX;
 }
@@ -37,8 +41,16 @@ float Object::getSPeed() {
     return speed;
 }
 
-sf::Sprite Object::getSPrite() {
+sf::Sprite Object::getSprite() {
     return sprite;
+}
+
+sf::Texture Object::getTexture() {
+    return texture;
+}
+
+void Object::setSpriteRotation(int spriteRotation) {
+    this->spriteRotation = spriteRotation;
 }
 
 void Object::setCoordX(float coordX) {
@@ -65,8 +77,18 @@ void Object::setDirection(int direction) {
     this->direction = direction;
 }
 
+// STRUCTURES CLASS
+
+std::string Structures::getObjectName() {
+    return objectName;
+}
+
 // UNITS CLASS
 
-std::string Units::getObjectName() {
+std::string PlayerUnits::getObjectName() {
+    return objectName;
+}
+
+std::string AIUnits::getObjectName() {
     return objectName;
 }
