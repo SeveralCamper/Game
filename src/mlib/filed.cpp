@@ -29,14 +29,18 @@ void Field::SetFiled(sf::RenderWindow &window)
 
     for (int i = 0; i < 10; i++)
     {
-        for (int j = 0; j < 5; j++)
+        for (int j = 0; j < 6; j++)
         {
             if (fieldTilesArray[i][j] == 0)
             {
-                if (i == 9 || j == 4)
+                if ((i == 9 || j == 4) || (j == 5))
                 {
                     grassSprite.setPosition(-50 + 181 * i, -50 + 172 * j);
                     window.draw(grassSprite);
+                    if (i == 9 || j == 5) {
+                        grassSprite.setPosition(-50 + 181 * i, -50 + 172 * (j+1));
+                        window.draw(grassSprite);
+                    }
                     if (j == 4)
                     {
                         grassSprite.setPosition(-50 + 160 * i, -50 + 172 * j);

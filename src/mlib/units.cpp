@@ -9,12 +9,28 @@ void Object::update(float time) {
         case 2: directionX = 0; directionY = speed;   break; //  движение вниз
         case 3: directionX = 0; directionY = -speed;   break; //  движение вверх
     }
-    
+
+    if (HP <= 0)  {
+        isAlive = false;
+
+    }
     coordX += directionX * time;
     coordY += directionY * time;
     
     speed = 0; // остановка персонажа
     sprite.setPosition(coordX,coordY);
+}
+
+bool Object::getIsAlive() {
+    return isAlive;
+}
+
+int Object::getHP() {
+    return HP;
+}
+
+int Object::getDMG() {
+    return DMG;
 }
 
 int Object::getSpriteRotation() {
@@ -47,6 +63,18 @@ sf::Sprite Object::getSprite() {
 
 sf::Texture Object::getTexture() {
     return texture;
+}
+
+void Object::setHP(int HP) {
+    this->HP = HP;
+}
+
+void Object::setDMG(int DMG) {
+    this->DMG = DMG;
+}
+
+void Object::setIsAlive(bool isAlive) {
+    this->isAlive = isAlive;
 }
 
 void Object::setSpriteRotation(int spriteRotation) {

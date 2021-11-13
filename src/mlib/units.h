@@ -18,28 +18,38 @@ class Object { // родительский класс объектов
 
         virtual std::string getObjectName() = 0;
 
-        int getSpriteRotation();
+        bool getIsAlive();
 
+        int getSpriteRotation();
+        int getHP();
+        int getDMG();
+
+        float getSPeed();
         float getCoordX();
         float getCoordY();
         float getDirectionX();
         float getDirectionY();
-        float getSPeed();
 
         sf::Sprite getSprite();
         sf::Texture getTexture();
 
+
+        void setHP(int HP);
+        void setDMG(int DMG);
+        void setSPeed(float speed);
+        void setIsAlive(bool alive);
         void setCoordX(float coordX);
         void setCoordY(float coordY);
+        void setDirection(int direction);
         void setDirectionX(float directionX);
         void setDirectionY(float directionY);
-        void setSPeed(float speed);
-        void setDirection(int direction);
         void setSpriteRotation(int spriteRotation);
 
         void update(float time);
  
     protected:
+        bool isAlive = true;
+
         float coordX, coordY, directionX, directionY, speed = 0;
 
         int HP, DMG, spriteRotation = 0, direction = 0;
@@ -113,14 +123,16 @@ class Hero : public PlayerUnits {
     Hero() {
     }
 
-    Hero(sf::String filePath, float coordX, float coordY) {
+    Hero(sf::String filePath, float coordX, float coordY, float spriteSizeX, float spriteSizeY) {
         this->filePath = filePath;
         sprite.setRotation(180);
         image.loadFromFile(this->filePath);
         texture.loadFromImage(image);
         sprite.setTexture(texture);
-        sprite.setOrigin(sf::Vector2f(8.5,14));
+        sprite.setOrigin(sf::Vector2f(spriteSizeX,spriteSizeY));
         this->coordX = coordX; this->coordY = coordY;
+        HP = 200;
+        DMG = 20;
     }
 
     protected:
