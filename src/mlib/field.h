@@ -2,9 +2,11 @@
 #define FILED_H_
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
-#include "settings.h"
 #include <string.h>
+#include <iostream>
+
+#include "settings.h"
+
 
 class Field {
     public:
@@ -32,7 +34,7 @@ class Field {
 
     }
 
-    void SetFiled(sf::RenderWindow& window);
+    void setFiled(sf::RenderWindow& window);
 
     float GetFieldXSize();
     float GetFieldYSize();
@@ -146,6 +148,8 @@ class Environment {
         diedFSTexture.loadFromFile("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/FriendlySoldierDie.png");
         diedFSSprite.setTexture(diedFSTexture);
 
+        textureEnd.loadFromFile("sprites/tds-modern-gui-pixel-art/Mission Failed/BG.png");
+        spriteEnd.setTexture(textureEnd);      
     }
 
     ~Environment() {
@@ -154,6 +158,8 @@ class Environment {
 
     void SetEnvironment(sf::RenderWindow& window);
     void SetEnvironmentTrees(sf::RenderWindow& window);
+
+    void endGame(sf::RenderWindow& window);
 
     private:
 
@@ -237,6 +243,11 @@ class Environment {
 
         sf::Texture diedFSTexture;
         sf::Sprite diedFSSprite;
+
+        // END GAME
+
+        sf::Texture textureEnd;
+        sf::Sprite spriteEnd;
 
 
 };

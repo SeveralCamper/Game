@@ -16,14 +16,14 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(GameField.GetFieldXSize(), GameField.GetFieldYSize()), "Game");
 	
 	sf::Clock clock;
+	sf::Sprite spriteEnd;
  
 	Hero Player("sprites/tds-modern-hero-weapons-and-props/Hero_Pistol/Hero_Pistol.png", 250, 250, 8.5, 14);
 
 	Player.getSprite().setRotation(180);
- 
-	while (window.isOpen())
-	{
- 
+	int endFlag = 0;
+	while (window.isOpen()) {
+		if (!endFlag) {
 		float time = clock.getElapsedTime().asMicroseconds();
 		clock.restart();
 		time = time / 800;
@@ -96,36 +96,30 @@ int main()
 			if (Player.getCoordX() > 1000 && Player.getCoordY() < 500) {
 				Player.setHP(0);
 		}
-	} else {
-		int timeAfterDie;
-		sf::String filePath = " ";
-	
-		sf::Sprite sprite;
-        sf::Image image;
-        sf::Texture texture;
-
-		image.loadFromFile(this->filePath);
-        texture.loadFromImage(image);
-        sprite.setTexture(texture);
-        sprite.setOrigin(sf::Vector2f(spriteSizeX,spriteSizeY));
-		window.draw()
-		while(timeAfterDie < 1000) {
-			timeAfterDie++;
-  			std::this_thread::sleep_for(std::chrono::milliseconds(1));
-		}
-		window.close();
-		}
+	}
 		// std::cout << "X: " << Player.getCoordX() << "Y: " << Player.getCoordY() << std::endl; // отладка координат
  
 		Player.update(time); //  оживляем объект p класса Player с помощью времени sfml, передавая время в качестве параметра функции update. благодаря этому персонаж может двигаться
 
 		window.clear();
-		GameField.SetFiled(window);
+		GameField.setFiled(window);
 		Item.SetEnvironment(window);
 		window.draw(Player.getSprite());
 		Item.SetEnvironmentTrees(window);
-		window.display();
+		if (!Player.getIsAlive()) {
+			Item.endGame(window);
+			endFlag = 1;
+		}
+		window.display();		
+		} else {
+			int timeAfterDie = 0;
+			while(timeAfterDie < 1000) {
+				timeAfterDie++;
+				std::this_thread::sleep_for(std::chrono::milliseconds(1));
+			}
+			window.close();
+		}
 	}
- 
+
 	return 0;
 }

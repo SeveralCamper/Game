@@ -10,7 +10,13 @@ float Field::GetFieldYSize()
     return fieldYSize;
 }
 
-void Field::SetFiled(sf::RenderWindow &window)
+void Environment::endGame(sf::RenderWindow& window) {
+    spriteEnd.setPosition(700, 350);
+    spriteEnd.setScale(sf::Vector2f(2,2));
+	window.draw(spriteEnd);
+}
+
+void Field::setFiled(sf::RenderWindow &window)
 {
     for (int i = 0; i < 10; i++)
     {
