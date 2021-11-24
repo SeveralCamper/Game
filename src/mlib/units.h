@@ -6,7 +6,7 @@
 
 // PARENTAL ABSTRACT OBJECT CLASS
 
-class Object { // родительский класс объектов
+class Object {
     public:
         Object() {
 
@@ -31,8 +31,9 @@ class Object { // родительский класс объектов
         float getDirectionY();
 
         sf::Sprite getSprite();
-        sf::Texture getTexture();
 
+        sf::Texture getTexture();
+        sf::Texture getDieTexture();
 
         void setHP(int HP);
         void setDMG(int DMG);
@@ -43,10 +44,11 @@ class Object { // родительский класс объектов
         void setDirection(int direction);
         void setDirectionX(float directionX);
         void setDirectionY(float directionY);
+        void setSprite(sf::Texture newTexture);
         void setSpriteRotation(int spriteRotation);
 
         void update(float time);
- 
+
     protected:
         bool isAlive = true;
 
@@ -55,10 +57,17 @@ class Object { // родительский класс объектов
         int HP, DMG, spriteRotation = 0, direction = 0;
 
         std::string objectName;
+
         sf::Sprite sprite;
+
         sf::String filePath;
+        sf::String diePath;
+
         sf::Image image;
+        sf::Image dieImage;
+
         sf::Texture texture;
+        sf::Texture dieTexture;
 
 };
 
@@ -126,10 +135,15 @@ class Hero : public PlayerUnits {
     Hero(sf::String filePath, float coordX, float coordY, float spriteSizeX, float spriteSizeY) {
         this->filePath = filePath;
         sprite.setRotation(180);
+
         image.loadFromFile(this->filePath);
         texture.loadFromImage(image);
         sprite.setTexture(texture);
         sprite.setOrigin(sf::Vector2f(spriteSizeX,spriteSizeY));
+
+        dieImage.loadFromFile("sprites/tds-modern-hero-weapons-and-props/Hero_Die/4.png");
+        dieTexture.loadFromImage(dieImage);
+
         this->coordX = coordX; this->coordY = coordY;
         HP = 200;
         DMG = 20;

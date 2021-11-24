@@ -1,5 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <chrono>
+#include <thread>
+
 #include "units.h"
 #include "field.h"
 #include "settings.h"
@@ -93,7 +96,25 @@ int main()
 			if (Player.getCoordX() > 1000 && Player.getCoordY() < 500) {
 				Player.setHP(0);
 		}
-	}
+	} else {
+		int timeAfterDie;
+		sf::String filePath = "";
+	
+		sf::Sprite sprite;
+        sf::Image image;
+        sf::Texture texture;
+
+		image.loadFromFile(this->filePath);
+        texture.loadFromImage(image);
+        sprite.setTexture(texture);
+        sprite.setOrigin(sf::Vector2f(spriteSizeX,spriteSizeY));
+		window.draw()
+		while(timeAfterDie < 1000) {
+			timeAfterDie++;
+  			std::this_thread::sleep_for(std::chrono::milliseconds(1));
+		}
+		window.close();
+		}
 		// std::cout << "X: " << Player.getCoordX() << "Y: " << Player.getCoordY() << std::endl; // отладка координат
  
 		Player.update(time); //  оживляем объект p класса Player с помощью времени sfml, передавая время в качестве параметра функции update. благодаря этому персонаж может двигаться

@@ -12,7 +12,7 @@ void Object::update(float time) {
 
     if (HP <= 0)  {
         isAlive = false;
-
+        sprite.setTexture(getDieTexture());
     }
     coordX += directionX * time;
     coordY += directionY * time;
@@ -65,6 +65,10 @@ sf::Texture Object::getTexture() {
     return texture;
 }
 
+sf::Texture Object::getDieTexture() {
+    return dieTexture;
+}
+
 void Object::setHP(int HP) {
     this->HP = HP;
 }
@@ -104,6 +108,10 @@ void Object::setSPeed(float speed) {
 
 void Object::setDirection(int direction) {
     this->direction = direction;
+}
+
+void Object::setSprite(sf::Texture newTexture) {
+    getSprite().setTexture(newTexture);
 }
 
 // STRUCTURES CLASS
