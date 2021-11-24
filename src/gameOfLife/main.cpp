@@ -98,7 +98,7 @@ int main()
 		}
 	} else {
 		int timeAfterDie;
-		sf::String filePath = "";
+		sf::String filePath = " ";
 	
 		sf::Sprite sprite;
         sf::Image image;
