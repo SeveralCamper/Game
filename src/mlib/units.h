@@ -123,6 +123,7 @@ class PlayerUnits : public Units {
     }
 
     std::string getObjectName() override;
+    void update(float time) override;
 
     protected:
 };
@@ -136,7 +137,6 @@ class Hero : public PlayerUnits {
     Hero(sf::String filePath, float coordX, float coordY, float spriteSizeX, float spriteSizeY) {
         this->filePath = filePath;
         this->dieFilePath = "sprites/tds-modern-hero-weapons-and-props/Hero_Die/4.png";
-        sprite.setRotation(180);
 
         image.loadFromFile(this->filePath);
         texture.loadFromImage(image);
@@ -154,8 +154,6 @@ class Hero : public PlayerUnits {
         range = 100;
     }
 
-    void update(float time) override;
-
     protected:
 
 };
@@ -170,7 +168,7 @@ class AIUnits : public Units {
     AIUnits(sf::String filePath, sf::String dieFilePath, float coordX, float coordY, float spriteSizeX, float spriteSizeY) {
         this->filePath = filePath;
         this->dieFilePath = dieFilePath;
-        sprite.setRotation(0);
+        sprite.setRotation(180);
 
         image.loadFromFile(this->filePath);
         texture.loadFromImage(image);
@@ -234,6 +232,10 @@ class EnemySoldier : public AIUnits {
             HP = 50;
             DMG = 20;
             range = 350;           
+        } else if (Name == "Capitan") {
+            HP = 150;
+            DMG = 15;
+            range = 150; 
         } else if (Name == "BOSS") {
             HP = 500;
             DMG = 25;

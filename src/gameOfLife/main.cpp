@@ -2,6 +2,7 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <list>
 
 #include "units.h"
 #include "field.h"
@@ -17,8 +18,15 @@ int main()
 	
 	sf::Clock clock;
 	sf::Sprite spriteEnd;
- 
+
+	std::list<EnemySoldier*>  entities;
+
 	Hero Player("sprites/tds-modern-hero-weapons-and-props/Hero_Pistol/Hero_Pistol.png", 250, 250, 8.5, 14);
+	for (int i = 0; i < 5; i++) {
+
+	}
+	EnemySoldier SoldierE1("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/Soldier.png", 
+	"sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/Die/SD_04.png", "Soldier", 900, 900, 10, 14);
 
 	Player.getSprite().setRotation(180);
 	int endFlag = 0;
@@ -98,13 +106,25 @@ int main()
 			}  // проверить конец игры
 		}	
 		// std::cout << "X: " << Player.getCoordX() << "Y: " << Player.getCoordY() << std::endl; // отладка координат
+
+		// AI CONTROL
+
+		if (SoldierE1.getCoordY() > 500) {
+			SoldierE1.setSPeed(0.05);
+		}
  
-		Player.update(time); //  оживляем объект p класса Player с помощью времени sfml, передавая время в качестве параметра функции update. благодаря этому персонаж может двигаться
+		// ALL
+
+		Player.update(time);
+		SoldierE1.update(time);
 
 		window.clear();
 		GameField.setFiled(window);
 		Item.SetEnvironment(window);
+
 		window.draw(Player.getSprite());
+		window.draw(SoldierE1.getSprite());
+
 		Item.SetEnvironmentTrees(window);
 		if (!Player.getIsAlive()) {
 			Item.endGame(window);

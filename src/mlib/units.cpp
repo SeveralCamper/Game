@@ -2,13 +2,28 @@
 
 // PARENTAL ABSTRACT OBJECT CLASS
 
-void Hero::update(float time) {
+void PlayerUnits::update(float time) {
     switch (direction) {
         case 0: directionX = speed; directionY = 0;   break; //  движение вправо
         case 1: directionX = -speed; directionY = 0;   break; //  движение влево
         case 2: directionX = 0; directionY = speed;   break; //  движение вниз
         case 3: directionX = 0; directionY = -speed;   break; //  движение вверх
     }
+
+    if (HP <= 0)  {
+        isAlive = false;
+        sprite.setTexture(getDieTexture());
+    }
+    coordX += directionX * time;
+    coordY += directionY * time;
+    
+    speed = 0; // остановка персонажа
+    sprite.setPosition(coordX,coordY);
+    dieSprite.setPosition(coordX,coordY);
+}
+
+void EnemySoldier::update(float time) {
+    directionX = 0; directionY = -speed;
 
     if (HP <= 0)  {
         isAlive = false;
