@@ -93,10 +93,10 @@ int main()
 					}
 				}
 			}
-			if (Player.getCoordX() > 1000 && Player.getCoordY() < 500) {
+			 if (Player.getCoordX() > 1000 && Player.getCoordY() < 500) {
 				Player.setHP(0);
-		}
-	}
+			}  // проверить конец игры
+		}	
 		// std::cout << "X: " << Player.getCoordX() << "Y: " << Player.getCoordY() << std::endl; // отладка координат
  
 		Player.update(time); //  оживляем объект p класса Player с помощью времени sfml, передавая время в качестве параметра функции update. благодаря этому персонаж может двигаться
@@ -113,7 +113,7 @@ int main()
 		window.display();		
 		} else {
 			int timeAfterDie = 0;
-			while(timeAfterDie < 1000) {
+			while(timeAfterDie < 1500) {
 				timeAfterDie++;
 				std::this_thread::sleep_for(std::chrono::milliseconds(1));
 			}

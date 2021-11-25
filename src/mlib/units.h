@@ -17,6 +17,7 @@ class Object {
         }
 
         virtual std::string getObjectName() = 0;
+        virtual void update(float time) = 0;
 
         bool getIsAlive();
 
@@ -31,6 +32,7 @@ class Object {
         float getDirectionY();
 
         sf::Sprite getSprite();
+        sf::Sprite getDieSprite();
 
         sf::Texture getTexture();
         sf::Texture getDieTexture();
@@ -47,21 +49,20 @@ class Object {
         void setSprite(sf::Texture newTexture);
         void setSpriteRotation(int spriteRotation);
 
-        void update(float time);
-
     protected:
         bool isAlive = true;
 
         float coordX, coordY, directionX, directionY, speed = 0;
 
-        int HP, DMG, spriteRotation = 0, direction = 0;
+        int HP, DMG, spriteRotation = 0, direction = 0, range = 0;
 
         std::string objectName;
 
         sf::Sprite sprite;
+        sf::Sprite dieSprite;
 
         sf::String filePath;
-        sf::String diePath;
+        sf::String dieFilePath;
 
         sf::Image image;
         sf::Image dieImage;
@@ -134,6 +135,7 @@ class Hero : public PlayerUnits {
 
     Hero(sf::String filePath, float coordX, float coordY, float spriteSizeX, float spriteSizeY) {
         this->filePath = filePath;
+        this->dieFilePath = "sprites/tds-modern-hero-weapons-and-props/Hero_Die/4.png";
         sprite.setRotation(180);
 
         image.loadFromFile(this->filePath);
@@ -141,13 +143,18 @@ class Hero : public PlayerUnits {
         sprite.setTexture(texture);
         sprite.setOrigin(sf::Vector2f(spriteSizeX,spriteSizeY));
 
-        dieImage.loadFromFile("sprites/tds-modern-hero-weapons-and-props/Hero_Die/4.png");
+        dieImage.loadFromFile(this->dieFilePath);
         dieTexture.loadFromImage(dieImage);
+        dieSprite.setTexture(dieTexture);
+        dieSprite.setOrigin(sf::Vector2f(14, 19));
 
         this->coordX = coordX; this->coordY = coordY;
         HP = 200;
         DMG = 20;
+        range = 100;
     }
+
+    void update(float time) override;
 
     protected:
 
@@ -158,6 +165,26 @@ class AIUnits : public Units {
 
     AIUnits() {
 
+    }
+
+    AIUnits(sf::String filePath, sf::String dieFilePath, float coordX, float coordY, float spriteSizeX, float spriteSizeY) {
+        this->filePath = filePath;
+        this->dieFilePath = dieFilePath;
+        sprite.setRotation(0);
+
+        image.loadFromFile(this->filePath);
+        texture.loadFromImage(image);
+        sprite.setTexture(texture);
+        sprite.setOrigin(sf::Vector2f(spriteSizeX,spriteSizeY));
+
+        dieImage.loadFromFile(this->dieFilePath);
+        dieTexture.loadFromImage(dieImage);
+        dieSprite.setTexture(dieTexture);
+        dieSprite.setOrigin(sf::Vector2f(13, 19));
+
+        this->coordX = coordX; this->coordY = coordY;
+        HP = 100;
+        DMG = 5;
     }
 
     ~AIUnits() {
@@ -177,12 +204,13 @@ class FriendlySoldier : public AIUnits {
 
     }
 
-    FriendlySoldier(sf::String filePath, float coordX, float coordY) {
-        this->filePath = filePath;
-        image.loadFromFile(this->filePath);
-        texture.loadFromImage(image);
-        sprite.setTexture(texture);
-        this->coordX = coordX; this->coordY = coordY;
+    FriendlySoldier(sf::String filePath, sf::String dieFilePath, sf::String Name, float coordX, float coordY, float spriteSizeX, float spriteSizeY) 
+    : AIUnits(filePath, dieFilePath, coordX, coordY, spriteSizeX, spriteSizeY) {
+        if (Name == "Soldier") {
+            HP = 200;
+            DMG = 5;
+            range = 100;
+        }
     }
 
     protected:
@@ -196,52 +224,24 @@ class EnemySoldier : public AIUnits {
 
     }
 
-    EnemySoldier(sf::String filePath, float coordX, float coordY) {
-        this->filePath = filePath;
-        image.loadFromFile(this->filePath);
-        texture.loadFromImage(image);
-        sprite.setTexture(texture);
-        this->coordX = coordX; this->coordY = coordY;
+    EnemySoldier(sf::String filePath, sf::String dieFilePath, sf::String Name, float coordX, float coordY, float spriteSizeX, float spriteSizeY) 
+    : AIUnits(filePath, dieFilePath, coordX, coordY, spriteSizeX, spriteSizeY) {
+        if (Name == "Soldier") {
+            HP = 100;
+            DMG = 5;
+            range = 100;
+        } else if (Name == "Sniper") {
+            HP = 50;
+            DMG = 20;
+            range = 350;           
+        } else if (Name == "BOSS") {
+            HP = 500;
+            DMG = 25;
+            range = 100;            
+        }
     }
 
-    protected:
-
-};
-
-class EnemySniper : public AIUnits {
-    public:
-
-    EnemySniper() {
-
-    }
-
-    EnemySniper(sf::String filePath, float coordX, float coordY) {
-        this->filePath = filePath;
-        image.loadFromFile(this->filePath);
-        texture.loadFromImage(image);
-        sprite.setTexture(texture);
-        this->coordX = coordX; this->coordY = coordY;
-    }
-
-    protected:
-
-};
-
-class Boss : public AIUnits {
-    public:
-
-    Boss() {
-
-    }
-
-    Boss(sf::String filePath, float coordX, float coordY) {
-        this->filePath = filePath;
-        image.loadFromFile(this->filePath);
-        texture.loadFromImage(image);
-        sprite.setTexture(texture);
-        this->coordX = coordX; this->coordY = coordY;
-    }
-    
+    void update(float time) override;
 
     protected:
 

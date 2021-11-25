@@ -2,7 +2,7 @@
 
 // PARENTAL ABSTRACT OBJECT CLASS
 
-void Object::update(float time) {
+void Hero::update(float time) {
     switch (direction) {
         case 0: directionX = speed; directionY = 0;   break; //  движение вправо
         case 1: directionX = -speed; directionY = 0;   break; //  движение влево
@@ -19,6 +19,7 @@ void Object::update(float time) {
     
     speed = 0; // остановка персонажа
     sprite.setPosition(coordX,coordY);
+    dieSprite.setPosition(coordX,coordY);
 }
 
 bool Object::getIsAlive() {
@@ -58,7 +59,15 @@ float Object::getSPeed() {
 }
 
 sf::Sprite Object::getSprite() {
-    return sprite;
+    if (isAlive) {
+        return sprite;
+    } else {
+        return dieSprite;
+    }
+}
+
+sf::Sprite Object::getDieSprite() {
+    return dieSprite;
 }
 
 sf::Texture Object::getTexture() {
@@ -84,6 +93,7 @@ void Object::setIsAlive(bool isAlive) {
 void Object::setSpriteRotation(int spriteRotation) {
     this->spriteRotation = spriteRotation;
     sprite.setRotation(spriteRotation);
+    dieSprite.setRotation(spriteRotation);
 }
 
 void Object::setCoordX(float coordX) {
