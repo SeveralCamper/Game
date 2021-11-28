@@ -20,13 +20,14 @@ int main()
 	sf::Sprite spriteEnd;
 
 	std::list<EnemySoldier*>  entities;
+	std::list<EnemySoldier*>::iterator it;
+
+	for (int i = 0; i < 5; i ++) {
+		entities.push_back(new EnemySoldier("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/Soldier.png", 
+	"sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/Die/SD_04.png", "Soldier", 900, 900 , 10, 14));
+	}
 
 	Hero Player("sprites/tds-modern-hero-weapons-and-props/Hero_Pistol/Hero_Pistol.png", 250, 250, 8.5, 14);
-	for (int i = 0; i < 5; i++) {
-
-	}
-	EnemySoldier SoldierE1("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/Soldier.png", 
-	"sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/Die/SD_04.png", "Soldier", 900, 900, 10, 14);
 
 	Player.getSprite().setRotation(180);
 	int endFlag = 0;
@@ -108,22 +109,28 @@ int main()
 		// std::cout << "X: " << Player.getCoordX() << "Y: " << Player.getCoordY() << std::endl; // отладка координат
 
 		// AI CONTROL
-
-		if (SoldierE1.getCoordY() > 500) {
-			SoldierE1.setSPeed(0.05);
+		for (it = entities.begin(); it != entities.end(); it++) {
+			if ((*it)->getCoordY() > 500) {
+				(*it)->setSPeed(0.05);
+			}
 		}
  
 		// ALL
 
 		Player.update(time);
-		SoldierE1.update(time);
+		for (it = entities.begin(); it != entities.end(); it++) {
+			(*it)->update(time);
+		}
+
 
 		window.clear();
 		GameField.setFiled(window);
 		Item.SetEnvironment(window);
 
 		window.draw(Player.getSprite());
-		window.draw(SoldierE1.getSprite());
+		for (it = entities.begin(); it != entities.end(); it++) {
+			window.draw((*it)->getSprite());
+		}
 
 		Item.SetEnvironmentTrees(window);
 		if (!Player.getIsAlive()) {
