@@ -6,6 +6,7 @@
 
 #include "units.h"
 #include "field.h"
+#include "enemyAdd.h"
 #include "settings.h"
 
 int main()
@@ -22,10 +23,7 @@ int main()
 	std::list<EnemySoldier*>  entities;
 	std::list<EnemySoldier*>::iterator it;
 
-	for (int i = 0; i < 5; i ++) {
-		entities.push_back(new EnemySoldier("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/Soldier.png", 
-	"sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/Die/SD_04.png", "Soldier", 900, 900 , 10, 14));
-	}
+	std::thread th(enemyListSpawn, std::ref(entities));
 
 	Hero Player("sprites/tds-modern-hero-weapons-and-props/Hero_Pistol/Hero_Pistol.png", 250, 250, 8.5, 14);
 
@@ -147,6 +145,7 @@ int main()
 			window.close();
 		}
 	}
+	th.join();
 
 	return 0;
 }

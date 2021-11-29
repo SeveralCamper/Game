@@ -1,4 +1,4 @@
-CFLAGS := -Wall -Werror -Wextra -std=c++17
+CFLAGS := -Wall -Werror -Wextra -Wl,--copy-dt-needed-entries -std=c++17
 CPPFLAGS := -MMD
 CXX := g++
 
