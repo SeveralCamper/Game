@@ -12,13 +12,13 @@
 int main()
 {
 	Field GameField;
-
-	Environment Item;
-
 	sf::RenderWindow window(sf::VideoMode(GameField.GetFieldXSize(), GameField.GetFieldYSize()), "Game");
-	
+
+	std::vector<std::thread> thread_pool;
 	sf::Clock clock;
 	sf::Sprite spriteEnd;
+
+	Environment Item;
 
 	std::list<EnemySoldier*>  entities;
 	std::list<EnemySoldier*>::iterator it;
@@ -102,6 +102,11 @@ int main()
 			}
 			 if (Player.getCoordX() > 1000 && Player.getCoordY() < 500) {
 				Player.setHP(0);
+			}  // проверить конец игры
+			for (it = entities.begin(); it != entities.end(); it++) {
+				if ((*it)->getCoordY() < 500) {
+				((*it)->setHP(0));
+				}
 			}  // проверить конец игры
 		}	
 		// std::cout << "X: " << Player.getCoordX() << "Y: " << Player.getCoordY() << std::endl; // отладка координат

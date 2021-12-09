@@ -169,6 +169,7 @@ class AIUnits : public Units {
         this->filePath = filePath;
         this->dieFilePath = dieFilePath;
         sprite.setRotation(180);
+        dieSprite.setRotation(180);
 
         image.loadFromFile(this->filePath);
         texture.loadFromImage(image);
