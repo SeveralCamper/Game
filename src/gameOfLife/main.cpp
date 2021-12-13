@@ -26,6 +26,7 @@ int main()
 	std::thread th(enemyListSpawn, std::ref(entities));
 
 	Hero Player("sprites/tds-modern-hero-weapons-and-props/Hero_Pistol/Hero_Pistol.png", 250, 250, 8.5, 14);
+	FriendlySoldier FS1();
 
 	Player.getSprite().setRotation(180);
 	int endFlag = 0;

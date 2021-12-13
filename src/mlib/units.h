@@ -16,7 +16,7 @@ class Object {
 
         }
 
-        virtual std::string getObjectName() = 0;
+        virtual std::string getObjectName() = 0; //
         virtual void update(float time) = 0;
 
         bool getIsAlive();
@@ -211,6 +211,8 @@ class FriendlySoldier : public AIUnits {
             range = 100;
         }
     }
+
+    void update(float time) override;
 
     protected:
 
