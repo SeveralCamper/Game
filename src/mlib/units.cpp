@@ -37,6 +37,19 @@ void EnemySoldier::update(float time) {
     dieSprite.setPosition(coordX,coordY);
 }
 
+void FriendlySoldier::update(float time) {
+    if (HP <= 0)  {
+        isAlive = false;
+        sprite.setTexture(getDieTexture());
+    }
+    if (time < 0) {
+        HP += 0;
+    }
+    
+    sprite.setPosition(coordX,coordY);
+    dieSprite.setPosition(coordX,coordY);
+}
+
 bool Object::getIsAlive() {
     return isAlive;
 }

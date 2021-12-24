@@ -26,7 +26,9 @@ int main()
 	std::thread th(enemyListSpawn, std::ref(entities));
 
 	Hero Player("sprites/tds-modern-hero-weapons-and-props/Hero_Pistol/Hero_Pistol.png", 250, 250, 8.5, 14);
-	FriendlySoldier FS1();
+
+	FriendlySoldier FS1("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/FriendlySoldier.png", 
+	"sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/FriendlySoldierDie.png", 900, 250, 8.5, 14);
 
 	Player.getSprite().setRotation(180);
 	int endFlag = 0;
@@ -122,6 +124,8 @@ int main()
 		// ALL
 
 		Player.update(time);
+		FS1.update(time);
+		
 		for (it = entities.begin(); it != entities.end(); it++) {
 			(*it)->update(time);
 		}
@@ -132,6 +136,7 @@ int main()
 		Item.SetEnvironment(window);
 
 		window.draw(Player.getSprite());
+
 		for (it = entities.begin(); it != entities.end(); it++) {
 			window.draw((*it)->getSprite());
 		}
@@ -141,6 +146,9 @@ int main()
 			Item.endGame(window);
 			endFlag = 1;
 		}
+
+		window.draw(FS1.getSprite());
+
 		window.display();		
 		} else {
 			int timeAfterDie = 0;

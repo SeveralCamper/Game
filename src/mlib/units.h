@@ -168,8 +168,6 @@ class AIUnits : public Units {
     AIUnits(sf::String filePath, sf::String dieFilePath, float coordX, float coordY, float spriteSizeX, float spriteSizeY) {
         this->filePath = filePath;
         this->dieFilePath = dieFilePath;
-        sprite.setRotation(180);
-        dieSprite.setRotation(180);
 
         image.loadFromFile(this->filePath);
         texture.loadFromImage(image);
@@ -203,13 +201,11 @@ class FriendlySoldier : public AIUnits {
 
     }
 
-    FriendlySoldier(sf::String filePath, sf::String dieFilePath, sf::String Name, float coordX, float coordY, float spriteSizeX, float spriteSizeY) 
+    FriendlySoldier(sf::String filePath, sf::String dieFilePath, float coordX, float coordY, float spriteSizeX, float spriteSizeY) 
     : AIUnits(filePath, dieFilePath, coordX, coordY, spriteSizeX, spriteSizeY) {
-        if (Name == "Soldier") {
-            HP = 200;
-            DMG = 5;
-            range = 100;
-        }
+        HP = 200;
+        DMG = 5;
+        range = 100;
     }
 
     void update(float time) override;
@@ -244,6 +240,8 @@ class EnemySoldier : public AIUnits {
             DMG = 25;
             range = 100;            
         }
+        sprite.setRotation(180);
+        dieSprite.setRotation(180);
     }
 
     void update(float time) override;
