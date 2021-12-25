@@ -1,6 +1,6 @@
 #include "units.h"
 
-// PARENTAL ABSTRACT OBJECT CLASS
+// HERO CLASS
 
 void PlayerUnits::update(float time) {
     switch (direction) {
@@ -22,33 +22,7 @@ void PlayerUnits::update(float time) {
     dieSprite.setPosition(coordX,coordY);
 }
 
-void EnemySoldier::update(float time) {
-    directionX = 0; directionY = -speed;
-
-    if (HP <= 0)  {
-        isAlive = false;
-        sprite.setTexture(getDieTexture());
-    }
-    coordX += directionX * time;
-    coordY += directionY * time;
-    
-    speed = 0; // остановка персонажа
-    sprite.setPosition(coordX,coordY);
-    dieSprite.setPosition(coordX,coordY);
-}
-
-void FriendlySoldier::update(float time) {
-    if (HP <= 0)  {
-        isAlive = false;
-        sprite.setTexture(getDieTexture());
-    }
-    if (time < 0) {
-        HP += 0;
-    }
-    
-    sprite.setPosition(coordX,coordY);
-    dieSprite.setPosition(coordX,coordY);
-}
+// PARENTAL ABSTRACT OBJECT CLASS
 
 bool Object::getIsAlive() {
     return isAlive;
@@ -60,6 +34,10 @@ int Object::getHP() {
 
 int Object::getDMG() {
     return DMG;
+}
+
+int Object::getRange() {
+    return range;
 }
 
 int Object::getSpriteRotation() {
@@ -98,6 +76,10 @@ sf::Sprite Object::getDieSprite() {
     return dieSprite;
 }
 
+sf::Sprite Object::getFireSprite() {
+    return fireSprite;
+}
+
 sf::Texture Object::getTexture() {
     return texture;
 }
@@ -106,12 +88,20 @@ sf::Texture Object::getDieTexture() {
     return dieTexture;
 }
 
+sf::Texture Object::getFireTexture() {
+    return fireTexture;
+}
+
 void Object::setHP(int HP) {
     this->HP = HP;
 }
 
 void Object::setDMG(int DMG) {
     this->DMG = DMG;
+}
+
+void Object::giveDMG(int DMG) {
+    this->HP = this->HP - DMG;
 }
 
 void Object::setIsAlive(bool isAlive) {
@@ -158,6 +148,17 @@ std::string Structures::getObjectName() {
     return objectName;
 }
 
+void Structures::update(float time) {
+    if (HP <= 0)  {
+        isAlive = false;
+    }
+    if (time < 0) {
+        HP += 0;
+    }
+    
+    sprite.setPosition(coordX,coordY);
+}
+
 // UNITS CLASS
 
 std::string PlayerUnits::getObjectName() {
@@ -166,4 +167,33 @@ std::string PlayerUnits::getObjectName() {
 
 std::string AIUnits::getObjectName() {
     return objectName;
+}
+
+void EnemySoldier::update(float time) {
+    directionX = 0; directionY = -speed;
+
+    if (HP <= 0)  {
+        isAlive = false;
+        sprite.setTexture(getDieTexture());
+    }
+    coordX += directionX * time;
+    coordY += directionY * time;
+    
+    speed = 0; // остановка персонажа
+    sprite.setPosition(coordX,coordY);
+    dieSprite.setPosition(coordX,coordY);
+    fireSprite.setPosition(coordX,coordY);
+}
+
+void FriendlySoldier::update(float time) {
+    if (HP <= 0)  {
+        isAlive = false;
+        sprite.setTexture(getDieTexture());
+    }
+    if (time < 0) {
+        HP += 0;
+    }
+    
+    sprite.setPosition(coordX,coordY);
+    dieSprite.setPosition(coordX,coordY);
 }

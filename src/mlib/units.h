@@ -24,6 +24,7 @@ class Object {
         int getSpriteRotation();
         int getHP();
         int getDMG();
+        int getRange();
 
         float getSPeed();
         float getCoordX();
@@ -33,12 +34,16 @@ class Object {
 
         sf::Sprite getSprite();
         sf::Sprite getDieSprite();
+        sf::Sprite getFireSprite();
 
         sf::Texture getTexture();
         sf::Texture getDieTexture();
+        sf::Texture getFireTexture();
+
 
         void setHP(int HP);
         void setDMG(int DMG);
+        void giveDMG(int DMG);
         void setSPeed(float speed);
         void setIsAlive(bool alive);
         void setCoordX(float coordX);
@@ -60,15 +65,19 @@ class Object {
 
         sf::Sprite sprite;
         sf::Sprite dieSprite;
+        sf::Sprite fireSprite;
 
         sf::String filePath;
         sf::String dieFilePath;
+        sf::String fireFilePath;
 
         sf::Image image;
         sf::Image dieImage;
+        sf::Image fireImage;
 
         sf::Texture texture;
         sf::Texture dieTexture;
+        sf::Texture fireTexture;  
 
 };
 
@@ -81,12 +90,15 @@ class Structures : public Object {
 
     }
 
-    Structures(sf::String filePath, float coordX, float coordY) {
+    Structures(sf::String filePath, float coordX, float coordY, float spriteSizeX, float spriteSizeY) {
         this->filePath = filePath;
         image.loadFromFile(this->filePath);
         texture.loadFromImage(image);
         sprite.setTexture(texture);
+        sprite.setOrigin(sf::Vector2f(spriteSizeX,spriteSizeY));
+        sprite.setScale(sf::Vector2f(1.5,1.5));
         this->coordX = coordX; this->coordY = coordY;
+        HP = 1000;
     }
 
     ~Structures() {
@@ -94,6 +106,7 @@ class Structures : public Object {
     }
 
     std::string getObjectName() override;
+    void update(float time) override;
 
     private:
 };
@@ -226,22 +239,30 @@ class EnemySoldier : public AIUnits {
         if (Name == "Soldier") {
             HP = 100;
             DMG = 5;
-            range = 100;
+            range = 200;
+
+            fireFilePath = "sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/Shot/SoldierShot.png";
+            fireImage.loadFromFile(fireFilePath);
+            fireTexture.loadFromImage(fireImage);
+            fireSprite.setTexture(fireTexture);
+            fireSprite.setOrigin(sf::Vector2f(spriteSizeX, spriteSizeY));
+
         } else if (Name == "Sniper") {
             HP = 50;
             DMG = 20;
-            range = 350;           
+            range = 400;           
         } else if (Name == "Capitan") {
             HP = 150;
             DMG = 15;
-            range = 150; 
+            range = 200; 
         } else if (Name == "BOSS") {
             HP = 500;
             DMG = 25;
-            range = 100;            
+            range = 250;            
         }
         sprite.setRotation(180);
         dieSprite.setRotation(180);
+        fireSprite.setRotation(180);
     }
 
     void update(float time) override;
