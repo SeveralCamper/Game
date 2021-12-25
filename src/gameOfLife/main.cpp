@@ -19,8 +19,9 @@ int main()
 	sf::Sprite spriteEnd;
 
 	Environment Item;
+	Menu Menu;
 
-	std::list<EnemySoldier*>  entities;
+	std::list<EnemySoldier*> entities;
 	std::list<EnemySoldier*>::iterator it;
 
 	std::thread th(enemyListSpawn, std::ref(entities));
@@ -29,6 +30,8 @@ int main()
 
 	FriendlySoldier FS1("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/FriendlySoldier.png", 
 	"sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/FriendlySoldierDie.png", 900, 250, 8.5, 14);
+
+	Structures Base("sprites/tds-modern-tilesets-environment/House/TDS04_0000_House01.png", 925, 200, 66, 66);
 
 	Player.getSprite().setRotation(180);
 	int endFlag = 0;
@@ -47,7 +50,7 @@ int main()
 		}
  
 		//  CHARACTER CONTROL
-		if (Player.getIsAlive()) {
+		if (Player.getIsAlive() && Base.getIsAlive()) {
 			if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || (sf::Keyboard::isKeyPressed(sf::Keyboard::A)))) {
 				if (Player.getCoordX() - 2 > FIELD_LEFT_BOARD) {
 					if ((Player.getCoordY() > RIVER_TOP_FIELD && Player.getCoordY() < (RIVER_DOWN_FIELD)) && ((Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < 945))) {
@@ -107,8 +110,8 @@ int main()
 				Player.setHP(0);
 			}  // проверить конец игры
 			for (it = entities.begin(); it != entities.end(); it++) {
-				if ((*it)->getCoordY() < 500) {
-				((*it)->setHP(0));
+				if ((*it)->getCoordY() < 400) {
+					// ((*it)->setHP(0));
 				}
 			}  // проверить конец игры
 		}	
@@ -116,7 +119,7 @@ int main()
 
 		// AI CONTROL
 		for (it = entities.begin(); it != entities.end(); it++) {
-			if ((*it)->getCoordY() > 500) {
+			if ((*it)->getCoordY() > 400) {
 				(*it)->setSPeed(0.05);
 			}
 		}
@@ -125,6 +128,7 @@ int main()
 
 		Player.update(time);
 		FS1.update(time);
+		Base.update(time);
 		
 		for (it = entities.begin(); it != entities.end(); it++) {
 			(*it)->update(time);
@@ -135,19 +139,38 @@ int main()
 		GameField.setFiled(window);
 		Item.SetEnvironment(window);
 
-		window.draw(Player.getSprite());
-
 		for (it = entities.begin(); it != entities.end(); it++) {
 			window.draw((*it)->getSprite());
 		}
 
+		window.draw(Player.getSprite());
+
 		Item.SetEnvironmentTrees(window);
-		if (!Player.getIsAlive()) {
+		if (!Player.getIsAlive() || !Base.getIsAlive()) {
 			Item.endGame(window);
 			endFlag = 1;
 		}
 
+		int attackCD;
+
+		for (it = entities.begin(); it != entities.end(); it++) {
+			if (((*it)->getCoordY()-(*it)->getRange()) <= Base.getCoordY()) {
+				attackCD++;
+				if (attackCD == 112) {
+					window.draw((*it)->getFireSprite());
+					if (Base.getHP() != 0) {
+						Base.giveDMG((*it)->getDMG());
+					}
+					printf("%d\n", Base.getHP());
+					attackCD = 0;
+				}
+			}
+		}
+
+		window.draw(Base.getSprite());
 		window.draw(FS1.getSprite());
+
+		Menu.SetMenu(window);
 
 		window.display();		
 		} else {
