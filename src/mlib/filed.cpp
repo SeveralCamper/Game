@@ -113,11 +113,6 @@ void Field::setFiled(sf::RenderWindow &window)
 }
 
 void Environment::SetEnvironmentTrees(sf::RenderWindow& window) {
-    // HOUSE
-
-    house01Sprite.setPosition(825, 100);
-    house01Sprite.setScale(sf::Vector2f(1.5,1.5));
-    window.draw(house01Sprite);
 
     // BUSHES
 
@@ -270,9 +265,6 @@ void Environment::SetEnvironment(sf::RenderWindow& window) {
     sandBag01Sprite.setPosition(720, 350);
     window.draw(sandBag01Sprite);
 
-    sandBag01Sprite.setPosition(865, 262);
-    window.draw(sandBag01Sprite);
-
     sandBag01Sprite.setPosition(900, 350);
     window.draw(sandBag01Sprite);
 
@@ -306,4 +298,10 @@ void Environment::SetEnvironment(sf::RenderWindow& window) {
 
     tree05Sprite.setPosition(410, 790);
     window.draw(tree05Sprite);
+}
+
+void Menu::SetMenu(sf::RenderWindow& window) {
+    baseHPSprite.setPosition(829, -10);
+    baseHPSprite.setScale(sf::Vector2f(4,4));
+    window.draw(baseHPSprite);   
 }

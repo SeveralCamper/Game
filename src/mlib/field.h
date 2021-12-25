@@ -72,10 +72,6 @@ class Environment {
         bridge02Texture.loadFromFile("sprites/tds-modern-tilesets-environment/Bridges/Sprite-0002.png");
         bridge02Sprite.setTexture(bridge02Texture);
 
-        // HOUSES
-
-        house01Texture.loadFromFile("sprites/tds-modern-tilesets-environment/House/TDS04_0000_House01.png");
-        house01Sprite.setTexture(house01Texture);
 
         // TREES
 
@@ -249,6 +245,27 @@ class Environment {
         sf::Texture textureEnd;
         sf::Sprite spriteEnd;
 
+
+};
+
+class Menu {
+    public:
+
+    Menu () {
+        baseHPTexture.loadFromFile("sprites/tds-modern-gui-pixel-art/HUD/MONEY-PANEL/Money-Panel-EMPTY-HUD.png");
+        baseHPSprite.setTexture(baseHPTexture);
+    }
+
+    ~Menu() {
+
+    }
+
+    void SetMenu(sf::RenderWindow& window);
+
+    private:
+
+        sf::Texture baseHPTexture;
+        sf::Sprite baseHPSprite;
 
 };
 
