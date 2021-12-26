@@ -106,9 +106,9 @@ int main()
 					}
 				}
 			}
-			 if (Player.getCoordX() > 1000 && Player.getCoordY() < 500) {
+			/* if (Player.getCoordX() > 1000 && Player.getCoordY() < 500) {
 				Player.setHP(0);
-			}  // проверить конец игры
+			} */  // проверить конец игры
 			for (it = entities.begin(); it != entities.end(); it++) {
 				if ((*it)->getCoordY() < 400) {
 					// ((*it)->setHP(0));
@@ -119,7 +119,7 @@ int main()
 
 		// AI CONTROL
 		for (it = entities.begin(); it != entities.end(); it++) {
-			if ((*it)->getCoordY() > 400) {
+			if ((*it)->getCoordY() > 400 && (*it)->getHP() != 0) {
 				(*it)->setSPeed(0.05);
 			}
 		}
@@ -161,10 +161,10 @@ int main()
 		for (it = entities.begin(); it != entities.end(); it++) {
 			if (((FS1.getCoordY() + FS1.getRange()) >= (*it)->getCoordY()) && (FS1.getHP() != 0)) {
 				attackCDFS++;
-				if (attackCDFS == 148) {
-					window.draw(FS1.getFireSprite());
+				if (attackCDFS == 12) {
 					if ((*it)->getHP() != 0) {
 						(*it)->giveDMG(FS1.getDMG());
+						window.draw(FS1.getFireSprite());
 					}
 					attackCDFS = 0;
 				}
