@@ -196,4 +196,5 @@ void FriendlySoldier::update(float time) {
     
     sprite.setPosition(coordX,coordY);
     dieSprite.setPosition(coordX,coordY);
+    fireSprite.setPosition(coordX,coordY);
 }

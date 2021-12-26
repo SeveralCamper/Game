@@ -216,9 +216,15 @@ class FriendlySoldier : public AIUnits {
 
     FriendlySoldier(sf::String filePath, sf::String dieFilePath, float coordX, float coordY, float spriteSizeX, float spriteSizeY) 
     : AIUnits(filePath, dieFilePath, coordX, coordY, spriteSizeX, spriteSizeY) {
-        HP = 200;
+        HP = 100;
         DMG = 5;
-        range = 100;
+        range = 250;
+
+        fireFilePath = "sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/Shot/SoldierShot.png";
+        fireImage.loadFromFile(fireFilePath);
+        fireTexture.loadFromImage(fireImage);
+        fireSprite.setTexture(fireTexture);
+        fireSprite.setOrigin(sf::Vector2f(spriteSizeX, spriteSizeY));
     }
 
     void update(float time) override;

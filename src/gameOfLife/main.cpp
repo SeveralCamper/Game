@@ -29,7 +29,7 @@ int main()
 	Hero Player("sprites/tds-modern-hero-weapons-and-props/Hero_Pistol/Hero_Pistol.png", 250, 250, 8.5, 14);
 
 	FriendlySoldier FS1("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/FriendlySoldier.png", 
-	"sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/FriendlySoldierDie.png", 900, 250, 8.5, 14);
+	"sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/FriendlySoldierDie.png", 920, 270, 8.5, 14);
 
 	Structures Base("sprites/tds-modern-tilesets-environment/House/TDS04_0000_House01.png", 925, 200, 66, 66);
 
@@ -151,24 +151,46 @@ int main()
 			endFlag = 1;
 		}
 
-		int attackCD;
+		window.draw(Base.getSprite());
+		window.draw(FS1.getSprite());
+
+		int attackCDES;
+		int attackCDFS;
+		int BaseOrSolider;
 
 		for (it = entities.begin(); it != entities.end(); it++) {
-			if (((*it)->getCoordY()-(*it)->getRange()) <= Base.getCoordY()) {
-				attackCD++;
-				if (attackCD == 112) {
+			if (((FS1.getCoordY() + FS1.getRange()) >= (*it)->getCoordY()) && (FS1.getHP() != 0)) {
+				attackCDFS++;
+				if (attackCDFS == 148) {
+					window.draw(FS1.getFireSprite());
+					if ((*it)->getHP() != 0) {
+						(*it)->giveDMG(FS1.getDMG());
+					}
+					attackCDFS = 0;
+				}
+			}
+
+			printf("HP: %d\n", (*it)->getHP());
+
+			if ((((*it)->getCoordY()-(*it)->getRange()) <= Base.getCoordY()) && ((*it)->getHP() != 0)) {
+				attackCDES++;
+				if (attackCDES == 112) {
+					BaseOrSolider++;
 					window.draw((*it)->getFireSprite());
 					if (Base.getHP() != 0) {
-						Base.giveDMG((*it)->getDMG());
+						if (BaseOrSolider == 5 && FS1.getHP() != 0) {
+							FS1.giveDMG((*it)->getDMG());
+							BaseOrSolider = 0;
+						} else {
+							Base.giveDMG((*it)->getDMG());
+						}
 					}
-					printf("%d\n", Base.getHP());
-					attackCD = 0;
+					// printf("base: %d\n", Base.getHP());
+					// printf("fs1: %d\n", FS1.getHP());
+					attackCDES = 0;
 				}
 			}
 		}
-
-		window.draw(Base.getSprite());
-		window.draw(FS1.getSprite());
 
 		Menu.SetMenu(window);
 
