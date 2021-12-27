@@ -30,12 +30,6 @@ int main()
 	std::vector<std::thread> thread_pool;
 	std::thread th(enemyListSpawn, std::ref(entities));
 
-	sf::Font font; 
-	font.loadFromFile("CyrilicOld.ttf");
-	sf::Text text("", font, 20);
-	text.setFillColor(sf::Color::Red);
-	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-
 	sf::RenderWindow window(sf::VideoMode(GameField.GetFieldXSize(), GameField.GetFieldYSize()), "Game");
 
 	int endFlag = 0;
@@ -159,7 +153,6 @@ int main()
 		window.draw(Base.getSprite());
 		window.draw(FS1.getSprite());
 
-		int attackCDES;
 		int BaseOrSolider;
 
 		for (it = entities.begin(); it != entities.end(); it++) {
@@ -174,29 +167,44 @@ int main()
 				}
 			}
 
-			printf("HP: %d\n", (*it)->getHP());
+			// printf("HP: %d\n", (*it)->getHP());
 
 			if ((((*it)->getCoordY()-(*it)->getRange()) <= Base.getCoordY()) && ((*it)->getHP() != 0)) {
-				attackCDES++;
-				if (attackCDES == 112) {
+				(*it)->incAttackCD();
+				if ((*it)->getAttackCD() == 112) {
 					BaseOrSolider++;
 					window.draw((*it)->getFireSprite());
-					if (Base.getHP() != 0) {
+					if (Base.getHP() != 0 && (*it)->getHP() != 0) {
 						if (BaseOrSolider == 5 && FS1.getHP() != 0) {
 							FS1.giveDMG((*it)->getDMG());
 							BaseOrSolider = 0;
-						} else {
+						} else if ((*it)->getHP() != 0) {
 							Base.giveDMG((*it)->getDMG());
 						}
 					}
-					// printf("base: %d\n", Base.getHP());
-					// printf("fs1: %d\n", FS1.getHP());
-					attackCDES = 0;
+					printf("base: %d\n", Base.getHP());
+					printf("fs1: %d\n", FS1.getHP());
+					(*it)->setAttackCD(0);
 				}
 			}
 		}
 
 		Menu.SetMenu(window);
+
+        sf::Font font;
+        font.loadFromFile("fonts/" + DEFAULT_FONT);
+        sf::String message = "Base HP = ";
+        message += std::to_string(Base.getHP());
+
+        sf::Text textStep(message, font, DEFAULT_FONT_SIZE);
+
+        textStep.setPosition(sf::Vector2f(
+                window.getSize().x - 995,
+                window.getSize().y - 875));
+
+        textStep.setFillColor(LIGHTY_BROWN_COLOR);
+
+        window.draw(textStep);
 
 		window.display();		
 		} else {

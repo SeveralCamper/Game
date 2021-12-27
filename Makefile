@@ -48,8 +48,4 @@ clean:
 	find ./bin -type f -name "gameOfLife" -exec rm -f '{}' \;
 	find ./src/mlib -type f -name "logic" -exec rm -f '{}' \;
 
-format:
-	cd src; find . -name "*.cpp" -exec clang-format -i {} \;
-	cd src; find . -name "*.h" -exec clang-format -i {} \;
-
 .PHONY: clean test run all format

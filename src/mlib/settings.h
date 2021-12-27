@@ -12,4 +12,10 @@ int const FIELD_DOWN_BOARD = 895;
 int const BRIDGE_RIGHT_BOARD = 970;
 int const BRIDGE_LEFT_BOARD = 885;
 
+static const sf::Color LIGHTY_BROWN_COLOR = sf::Color(89, 76, 41);
+
+
+static const std::string DEFAULT_FONT = "arial.ttf";
+static const int DEFAULT_FONT_SIZE = 20;
+
 #endif //  SETTINGS_H_
