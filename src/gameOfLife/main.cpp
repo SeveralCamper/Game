@@ -11,30 +11,35 @@
 
 int main()
 {
+	Menu Menu;
 	Field GameField;
-	sf::RenderWindow window(sf::VideoMode(GameField.GetFieldXSize(), GameField.GetFieldYSize()), "Game");
+	Environment Item;
 
-	std::vector<std::thread> thread_pool;
 	sf::Clock clock;
 	sf::Sprite spriteEnd;
 
-	Environment Item;
-	Menu Menu;
+	Hero Player("sprites/tds-modern-hero-weapons-and-props/Hero_Pistol/Hero_Pistol.png", 250, 250, 8.5, 14);
+	FriendlySoldier FS1("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/FriendlySoldier.png", 
+	"sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/FriendlySoldierDie.png", 920, 270, 8.5, 14);
+	Structures Base("sprites/tds-modern-tilesets-environment/House/TDS04_0000_House01.png", 925, 200, 66, 66);
+
 
 	std::list<EnemySoldier*> entities;
 	std::list<EnemySoldier*>::iterator it;
 
+	std::vector<std::thread> thread_pool;
 	std::thread th(enemyListSpawn, std::ref(entities));
 
-	Hero Player("sprites/tds-modern-hero-weapons-and-props/Hero_Pistol/Hero_Pistol.png", 250, 250, 8.5, 14);
+	sf::Font font; 
+	font.loadFromFile("CyrilicOld.ttf");
+	sf::Text text("", font, 20);
+	text.setFillColor(sf::Color::Red);
+	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
 
-	FriendlySoldier FS1("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/FriendlySoldier.png", 
-	"sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/FriendlySoldierDie.png", 920, 270, 8.5, 14);
+	sf::RenderWindow window(sf::VideoMode(GameField.GetFieldXSize(), GameField.GetFieldYSize()), "Game");
 
-	Structures Base("sprites/tds-modern-tilesets-environment/House/TDS04_0000_House01.png", 925, 200, 66, 66);
-
-	Player.getSprite().setRotation(180);
 	int endFlag = 0;
+
 	while (window.isOpen()) {
 		if (!endFlag) {
 		float time = clock.getElapsedTime().asMicroseconds();
@@ -155,18 +160,17 @@ int main()
 		window.draw(FS1.getSprite());
 
 		int attackCDES;
-		int attackCDFS;
 		int BaseOrSolider;
 
 		for (it = entities.begin(); it != entities.end(); it++) {
 			if (((FS1.getCoordY() + FS1.getRange()) >= (*it)->getCoordY()) && (FS1.getHP() != 0)) {
-				attackCDFS++;
-				if (attackCDFS == 12) {
+				FS1.incAttackCD();
+				if (FS1.getAttackCD() == 142) {
 					if ((*it)->getHP() != 0) {
 						(*it)->giveDMG(FS1.getDMG());
 						window.draw(FS1.getFireSprite());
 					}
-					attackCDFS = 0;
+					FS1.setAttackCD(0);
 				}
 			}
 

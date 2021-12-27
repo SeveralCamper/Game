@@ -25,6 +25,7 @@ class Object {
         int getHP();
         int getDMG();
         int getRange();
+        int getAttackCD();
 
         float getSPeed();
         float getCoordX();
@@ -42,12 +43,14 @@ class Object {
 
 
         void setHP(int HP);
+        void incAttackCD();
         void setDMG(int DMG);
         void giveDMG(int DMG);
         void setSPeed(float speed);
         void setIsAlive(bool alive);
         void setCoordX(float coordX);
         void setCoordY(float coordY);
+        void setAttackCD(int attackCD);
         void setDirection(int direction);
         void setDirectionX(float directionX);
         void setDirectionY(float directionY);
@@ -59,7 +62,7 @@ class Object {
 
         float coordX, coordY, directionX, directionY, speed = 0;
 
-        int HP, DMG, spriteRotation = 0, direction = 0, range = 0;
+        int HP, DMG, spriteRotation = 0, direction = 0, range = 0, attackCD = 0;
 
         std::string objectName;
 
@@ -154,6 +157,7 @@ class Hero : public PlayerUnits {
         image.loadFromFile(this->filePath);
         texture.loadFromImage(image);
         sprite.setTexture(texture);
+        sprite.setRotation(180);
         sprite.setOrigin(sf::Vector2f(spriteSizeX,spriteSizeY));
 
         dieImage.loadFromFile(this->dieFilePath);
@@ -220,7 +224,7 @@ class FriendlySoldier : public AIUnits {
         DMG = 5;
         range = 250;
 
-        fireFilePath = "sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/Shot/SoldierShot.png";
+        fireFilePath = "sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Soldier/Shot/FriendlySoldierShot.png";
         fireImage.loadFromFile(fireFilePath);
         fireTexture.loadFromImage(fireImage);
         fireSprite.setTexture(fireTexture);

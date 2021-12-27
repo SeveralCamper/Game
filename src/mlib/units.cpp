@@ -40,6 +40,10 @@ int Object::getRange() {
     return range;
 }
 
+int Object::getAttackCD() {
+    return attackCD;
+}
+
 int Object::getSpriteRotation() {
     return spriteRotation;
 }
@@ -102,6 +106,14 @@ void Object::setDMG(int DMG) {
 
 void Object::giveDMG(int DMG) {
     this->HP = this->HP - DMG;
+}
+
+void Object::setAttackCD(int attackCD) {
+    this->attackCD = attackCD;
+}
+
+void Object::incAttackCD() {
+    this->attackCD += 1;
 }
 
 void Object::setIsAlive(bool isAlive) {
