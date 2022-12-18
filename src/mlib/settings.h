@@ -9,8 +9,8 @@ int const FIELD_RIGHT_BOARD = 1840;
 int const FIELD_LEFT_BOARD = 10;
 int const FIELD_TOP_BOARD = 10;
 int const FIELD_DOWN_BOARD = 895;
-int const BRIDGE_RIGHT_BOARD = 970;
-int const BRIDGE_LEFT_BOARD = 885;
+int const BRIDGE_RIGHT_BOARD = 975;
+int const BRIDGE_LEFT_BOARD = 880;
 
 static const sf::Color LIGHTY_BROWN_COLOR = sf::Color(89, 76, 41);
 

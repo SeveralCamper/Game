@@ -42,17 +42,21 @@ int main()
  
  
 		sf::Event event;
-		while (window.pollEvent(event))
-		{
+		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
  
 		//  CHARACTER CONTROL
 		if (Player.getIsAlive() && Base.getIsAlive()) {
+			std::cout << "X: " << Player.getCoordX() << std::endl;
+			std::cout << "Y: " << Player.getCoordY() << std::endl;
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
+				
+			}
 			if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || (sf::Keyboard::isKeyPressed(sf::Keyboard::A)))) {
-				if (Player.getCoordX() - 2 > FIELD_LEFT_BOARD) {
-					if ((Player.getCoordY() > RIVER_TOP_FIELD && Player.getCoordY() < (RIVER_DOWN_FIELD)) && ((Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < 945))) {
+				if (Player.getCoordX() - 5 > FIELD_LEFT_BOARD) {
+					if ((Player.getCoordY() + 5 > RIVER_TOP_FIELD && Player.getCoordY() < (RIVER_DOWN_FIELD)) && ((Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD))) {
 						if (Player.getCoordX() - 1 > BRIDGE_LEFT_BOARD) {
 							Player.setDirection(1); Player.setSPeed(0.1);
 							Player.setSpriteRotation(90);
@@ -65,8 +69,8 @@ int main()
 			}
 	
 			if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || (sf::Keyboard::isKeyPressed(sf::Keyboard::D)))) {
-				if (Player.getCoordX() + 2 < FIELD_RIGHT_BOARD) {
-					if ((Player.getCoordY() > RIVER_TOP_FIELD && Player.getCoordY() < (RIVER_DOWN_FIELD)) && ((Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD))) {
+				if (Player.getCoordX() + 5 < FIELD_RIGHT_BOARD) {
+					if ((Player.getCoordY() + 5 > RIVER_TOP_FIELD && Player.getCoordY() < (RIVER_DOWN_FIELD)) && ((Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD))) {
 						if (Player.getCoordX() + 1 < BRIDGE_RIGHT_BOARD) {
 							Player.setDirection(0); Player.setSPeed(0.1);
 							Player.setSpriteRotation(270);
@@ -80,7 +84,7 @@ int main()
 	
 			if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || (sf::Keyboard::isKeyPressed(sf::Keyboard::W)))) {
 			if (Player.getCoordY() < (RIVER_TOP_FIELD + 1) || (Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD)) {
-				if (Player.getCoordY() + 2 > FIELD_TOP_BOARD) {
+				if (Player.getCoordY() + 5 > FIELD_TOP_BOARD) {
 					Player.setDirection(3); Player.setSPeed(0.1); //  направление вверх
 					Player.setSpriteRotation(180);
 					}
@@ -93,8 +97,8 @@ int main()
 			}	
 	
 			if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || (sf::Keyboard::isKeyPressed(sf::Keyboard::S)))) {
-				if (Player.getCoordY() < (RIVER_TOP_FIELD - 1) || (Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD)) {
-					if (Player.getCoordY() - 2 < RIVER_TOP_FIELD || ((Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD) && (Player.getCoordY() - 1 < FIELD_DOWN_BOARD))) {
+				if (Player.getCoordY() + 5 < (RIVER_TOP_FIELD - 1) || (Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD)) {
+					if (Player.getCoordY() - 5 < RIVER_TOP_FIELD || ((Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD) && (Player.getCoordY() - 1 < FIELD_DOWN_BOARD))) {
 						Player.setDirection(2); Player.setSPeed(0.1); //  направление вниз
 						Player.setSpriteRotation(0);
 					}
