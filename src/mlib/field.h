@@ -145,7 +145,16 @@ class Environment {
         diedFSSprite.setTexture(diedFSTexture);
 
         textureEnd.loadFromFile("sprites/tds-modern-gui-pixel-art/Mission Failed/BG.png");
-        spriteEnd.setTexture(textureEnd);      
+        spriteEnd.setTexture(textureEnd);    
+
+        // BASE ENVIRONMENT
+
+        newBaseTexture.loadFromFile("sprites/tds-modern-tilesets-environment/House/TDS04_House02.png");
+        newBaseSprite.setTexture(newBaseTexture);
+
+        HumveeTexture.loadFromFile("sprites/tds-pixel-art-modern-soldiers-and-vehicles-sprites/Humvee/Humvee2.png");
+        HumveeSprite.setTexture(HumveeTexture);
+
     }
 
     ~Environment() {
@@ -244,6 +253,14 @@ class Environment {
 
         sf::Texture textureEnd;
         sf::Sprite spriteEnd;
+
+        // BASE ENVIRONMENT
+
+        sf::Texture newBaseTexture;
+        sf::Sprite newBaseSprite;
+
+        sf::Texture HumveeTexture;
+        sf::Sprite HumveeSprite;
 
 
 };

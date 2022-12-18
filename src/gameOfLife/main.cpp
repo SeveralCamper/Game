@@ -9,8 +9,7 @@
 #include "enemyAdd.h"
 #include "settings.h"
 
-int main()
-{
+int main() {
 	Menu Menu;
 	Field GameField;
 	Environment Item;
@@ -32,7 +31,7 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(GameField.GetFieldXSize(), GameField.GetFieldYSize()), "Game");
 
-	int endFlag = 0;
+	int endFlag = 0, fireFlag = 0;
 
 	while (window.isOpen()) {
 		if (!endFlag) {
@@ -49,14 +48,11 @@ int main()
  
 		//  CHARACTER CONTROL
 		if (Player.getIsAlive() && Base.getIsAlive()) {
-			std::cout << "X: " << Player.getCoordX() << std::endl;
-			std::cout << "Y: " << Player.getCoordY() << std::endl;
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
-				
-			}
+			// std::cout << "X: " << Player.getCoordX() << std::endl;
+			// std::cout << "Y: " << Player.getCoordY() << std::endl;
 			if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || (sf::Keyboard::isKeyPressed(sf::Keyboard::A)))) {
 				if (Player.getCoordX() - 5 > FIELD_LEFT_BOARD) {
-					if ((Player.getCoordY() + 5 > RIVER_TOP_FIELD && Player.getCoordY() < (RIVER_DOWN_FIELD)) && ((Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD))) {
+					if (((Player.getCoordY() > RIVER_TOP_FIELD && Player.getCoordY() < RIVER_DOWN_FIELD))) {
 						if (Player.getCoordX() - 1 > BRIDGE_LEFT_BOARD) {
 							Player.setDirection(1); Player.setSPeed(0.1);
 							Player.setSpriteRotation(90);
@@ -70,7 +66,7 @@ int main()
 	
 			if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || (sf::Keyboard::isKeyPressed(sf::Keyboard::D)))) {
 				if (Player.getCoordX() + 5 < FIELD_RIGHT_BOARD) {
-					if ((Player.getCoordY() + 5 > RIVER_TOP_FIELD && Player.getCoordY() < (RIVER_DOWN_FIELD)) && ((Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD))) {
+					if (((Player.getCoordY() > RIVER_TOP_FIELD && Player.getCoordY() < RIVER_DOWN_FIELD))) {
 						if (Player.getCoordX() + 1 < BRIDGE_RIGHT_BOARD) {
 							Player.setDirection(0); Player.setSPeed(0.1);
 							Player.setSpriteRotation(270);
@@ -83,13 +79,13 @@ int main()
 			}
 	
 			if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || (sf::Keyboard::isKeyPressed(sf::Keyboard::W)))) {
-			if (Player.getCoordY() < (RIVER_TOP_FIELD + 1) || (Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD)) {
-				if (Player.getCoordY() + 5 > FIELD_TOP_BOARD) {
-					Player.setDirection(3); Player.setSPeed(0.1); //  направление вверх
-					Player.setSpriteRotation(180);
+				if (Player.getCoordY() < RIVER_TOP_FIELD || (Player.getCoordX() + 5 > BRIDGE_LEFT_BOARD && Player.getCoordX() - 5 < BRIDGE_RIGHT_BOARD)) {
+					if (Player.getCoordY() + 5 > FIELD_TOP_BOARD) {
+						Player.setDirection(3); Player.setSPeed(0.1); //  направление вверх
+						Player.setSpriteRotation(180);
 					}
-				} else if (Player.getCoordY() > RIVER_DOWN_FIELD + 15) {
-					if (Player.getCoordY() - 2 > RIVER_DOWN_FIELD + 15) {
+				} else if (Player.getCoordY() + 5 > RIVER_DOWN_FIELD) {
+					if (Player.getCoordY() - 2 > RIVER_DOWN_FIELD) {
 						Player.setDirection(3); Player.setSPeed(0.1); //  направление вверх
 						Player.setSpriteRotation(180);
 					}
@@ -97,19 +93,29 @@ int main()
 			}	
 	
 			if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || (sf::Keyboard::isKeyPressed(sf::Keyboard::S)))) {
-				if (Player.getCoordY() + 5 < (RIVER_TOP_FIELD - 1) || (Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD)) {
-					if (Player.getCoordY() - 5 < RIVER_TOP_FIELD || ((Player.getCoordX() > BRIDGE_LEFT_BOARD && Player.getCoordX() < BRIDGE_RIGHT_BOARD) && (Player.getCoordY() - 1 < FIELD_DOWN_BOARD))) {
+				if (Player.getCoordY() + 5 < RIVER_TOP_FIELD || (Player.getCoordX() + 5 > BRIDGE_LEFT_BOARD && Player.getCoordX() - 5 < BRIDGE_RIGHT_BOARD)) {
+					if (Player.getCoordY() - 1 < FIELD_DOWN_BOARD) {
 						Player.setDirection(2); Player.setSPeed(0.1); //  направление вниз
 						Player.setSpriteRotation(0);
 					}
-				} else if(Player.getCoordY() > RIVER_DOWN_FIELD) {
+				} else if(Player.getCoordY() + 5 > RIVER_DOWN_FIELD) {
 					if (Player.getCoordY() - 2 < BRIDGE_LEFT_BOARD) {
 						Player.setDirection(2); Player.setSPeed(0.1); //  направление вниз
 						Player.setSpriteRotation(0);
 					}
 				}
 			}
-			/* if (Player.getCoordX() > 1000 && Player.getCoordY() < 500) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+				for (it = entities.begin(); it != entities.end(); it++)  {
+					if ((Player.getCoordY() + Player.getRange()) >= (*it)->getCoordY() && (Player.getCoordX() + Player.getRange()) >= (*it)->getCoordX()) {
+						if ((*it)->getHP() != 0) {
+							(*it)->giveDMG(Player.getDMG());
+						}
+					}
+				}
+				fireFlag = 1;
+			}
+			/* if (Player.getCoordX() < 1000 || Player.getCoordY() < 200) {
 				Player.setHP(0);
 			} */  // проверить конец игры
 			for (it = entities.begin(); it != entities.end(); it++) {
@@ -146,7 +152,11 @@ int main()
 			window.draw((*it)->getSprite());
 		}
 
-		window.draw(Player.getSprite());
+		if (fireFlag != 0) {
+			window.draw(Player.getFireSprite());
+		} else {
+			window.draw(Player.getSprite());
+		}
 
 		Item.SetEnvironmentTrees(window);
 		if (!Player.getIsAlive() || !Base.getIsAlive()) {
@@ -160,7 +170,7 @@ int main()
 		int BaseOrSolider;
 
 		for (it = entities.begin(); it != entities.end(); it++) {
-			if (((FS1.getCoordY() + FS1.getRange()) >= (*it)->getCoordY()) && (FS1.getHP() != 0)) {
+			if (((FS1.getCoordY() + FS1.getRange()) >= (*it)->getCoordY()) && (FS1.getHP() != 0) && ((*it)->getHP() != 0)) {
 				FS1.incAttackCD();
 				if (FS1.getAttackCD() == 142) {
 					if ((*it)->getHP() != 0) {
@@ -179,7 +189,7 @@ int main()
 					BaseOrSolider++;
 					window.draw((*it)->getFireSprite());
 					if (Base.getHP() != 0 && (*it)->getHP() != 0) {
-						if (BaseOrSolider == 5 && FS1.getHP() != 0) {
+						if (BaseOrSolider == 5 && FS1.getHP() != 0 && (*it)->getHP() != 0) {
 							FS1.giveDMG((*it)->getDMG());
 							BaseOrSolider = 0;
 						} else if ((*it)->getHP() != 0) {
@@ -191,24 +201,35 @@ int main()
 					(*it)->setAttackCD(0);
 				}
 			}
+			std::cout << "It HP:" << (*it)->getHP() << std::endl;
 		}
 
 		Menu.SetMenu(window);
 
         sf::Font font;
         font.loadFromFile("fonts/" + DEFAULT_FONT);
-        sf::String message = "Base HP = ";
-        message += std::to_string(Base.getHP());
+        sf::String Base_message = "Base HP = ";
+		sf::String Horary_message = "Horary HP = ";
+        Base_message += std::to_string(Base.getHP());
+		Horary_message += std::to_string(FS1.getHP());
 
-        sf::Text textStep(message, font, DEFAULT_FONT_SIZE);
+        sf::Text textStep(Base_message, font, DEFAULT_FONT_SIZE);
+		sf::Text textStep_2(Horary_message, font, DEFAULT_FONT_SIZE);
 
         textStep.setPosition(sf::Vector2f(
-                window.getSize().x - 995,
+                window.getSize().x - 990,
                 window.getSize().y - 875));
-
+        textStep_2.setPosition(sf::Vector2f(
+                window.getSize().x - 995,
+                window.getSize().y - 845));
+		
         textStep.setFillColor(LIGHTY_BROWN_COLOR);
+		textStep_2.setFillColor(LIGHTY_BROWN_COLOR);
 
         window.draw(textStep);
+		window.draw(textStep_2);
+
+		fireFlag = 0;
 
 		window.display();		
 		} else {

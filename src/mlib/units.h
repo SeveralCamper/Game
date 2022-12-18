@@ -153,6 +153,7 @@ class Hero : public PlayerUnits {
     Hero(sf::String filePath, float coordX, float coordY, float spriteSizeX, float spriteSizeY) {
         this->filePath = filePath;
         this->dieFilePath = "sprites/tds-modern-hero-weapons-and-props/Hero_Die/4.png";
+        this->fireFilePath = "sprites/tds-modern-hero-weapons-and-props/Hero_Pistol/Hero_Pistol_Fire.png";
 
         image.loadFromFile(this->filePath);
         texture.loadFromImage(image);
@@ -160,14 +161,21 @@ class Hero : public PlayerUnits {
         sprite.setRotation(180);
         sprite.setOrigin(sf::Vector2f(spriteSizeX,spriteSizeY));
 
+        fireImage.loadFromFile(this->fireFilePath);
+        fireTexture.loadFromImage(fireImage);
+        fireSprite.setTexture(fireTexture);
+        fireSprite.setOrigin(sf::Vector2f(spriteSizeX, spriteSizeY));
+        fireSprite.setRotation(180);
+
         dieImage.loadFromFile(this->dieFilePath);
         dieTexture.loadFromImage(dieImage);
         dieSprite.setTexture(dieTexture);
         dieSprite.setOrigin(sf::Vector2f(14, 19));
+        dieSprite.setRotation(180);
 
         this->coordX = coordX; this->coordY = coordY;
         HP = 200;
-        DMG = 20;
+        DMG = 10;
         range = 100;
     }
 

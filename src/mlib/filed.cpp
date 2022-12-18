@@ -152,9 +152,6 @@ void Environment::SetEnvironmentTrees(sf::RenderWindow& window) {
 
     // TREES
 
-    tree02Sprite.setPosition(10, 410);
-    window.draw(tree02Sprite);
-
     tree01Sprite.setPosition(100, 300);
     window.draw(tree01Sprite);
 
@@ -178,6 +175,9 @@ void Environment::SetEnvironmentTrees(sf::RenderWindow& window) {
     tree01_1Sprite.setPosition(400, 0);
     window.draw(tree01_1Sprite);
 
+    tree02Sprite.setPosition(10, 410);
+    window.draw(tree02Sprite);
+
     tree02Sprite.setPosition(20, 20);
     window.draw(tree02Sprite);
 
@@ -190,13 +190,7 @@ void Environment::SetEnvironmentTrees(sf::RenderWindow& window) {
     tree02Sprite.setPosition(1510, 800);
     window.draw(tree02Sprite);
 
-    tree02Sprite.setPosition(550, 150);
-    window.draw(tree02Sprite);
-
-    tree02Sprite.setPosition(210, 0);
-    window.draw(tree02Sprite);
-
-    tree02Sprite.setPosition(210, 0);
+    tree02Sprite.setPosition(400, 200);
     window.draw(tree02Sprite);
 
     tree02Sprite.setPosition(210, 0);
@@ -219,6 +213,41 @@ void Environment::SetEnvironmentTrees(sf::RenderWindow& window) {
     tree03_1Sprite.setPosition(1760, 790);
     window.draw(tree03_1Sprite);
 
+    tree04Sprite.setPosition(1780, 220);
+    window.draw(tree04Sprite);
+
+    tree04Sprite.setPosition(10, 840);
+    window.draw(tree04Sprite);
+
+    tree05Sprite.setPosition(1100, 40);
+    window.draw(tree05Sprite);
+
+    tree05Sprite.setPosition(1200, 110);
+    window.draw(tree05Sprite);
+
+    tree05Sprite.setPosition(1180, 330);
+    window.draw(tree05Sprite);
+
+    tree05Sprite.setPosition(410, 790);
+    window.draw(tree05Sprite);
+
+    // BASE ENVIRONMENT
+
+    newBaseSprite.setPosition(580, 350);
+    newBaseSprite.setScale(sf::Vector2f(1.2, 1.2));
+    newBaseSprite.setRotation(270);
+    window.draw(newBaseSprite);
+
+    HumveeSprite.setPosition(1220, 80);
+    newBaseSprite.setScale(sf::Vector2f(1.2, 1.2));
+    HumveeSprite.setRotation(90);
+    window.draw(HumveeSprite);
+
+    HumveeSprite.setPosition(1220, 200);
+    newBaseSprite.setScale(sf::Vector2f(1.2, 1.2));
+    HumveeSprite.setRotation(90);
+    window.draw(HumveeSprite);
+
 }
 
 void Environment::SetEnvironment(sf::RenderWindow& window) {
@@ -229,9 +258,6 @@ void Environment::SetEnvironment(sf::RenderWindow& window) {
     window.draw(bridge02Sprite);
 
     // ROCKS
-
-    rock01Sprite.setPosition(580, 50);
-    window.draw(rock01Sprite);
 
     rock01Sprite.setPosition(1560, 400);
     window.draw(rock01Sprite);
@@ -278,26 +304,6 @@ void Environment::SetEnvironment(sf::RenderWindow& window) {
 
     diedFSSprite.setPosition(1013,778);
     window.draw(diedFSSprite);
-
-    // TREES
-
-    tree04Sprite.setPosition(1780, 220);
-    window.draw(tree04Sprite);
-
-    tree04Sprite.setPosition(10, 840);
-    window.draw(tree04Sprite);
-
-    tree05Sprite.setPosition(1100, 40);
-    window.draw(tree05Sprite);
-
-    tree05Sprite.setPosition(1200, 110);
-    window.draw(tree05Sprite);
-
-    tree05Sprite.setPosition(1180, 330);
-    window.draw(tree05Sprite);
-
-    tree05Sprite.setPosition(410, 790);
-    window.draw(tree05Sprite);
 }
 
 void Menu::SetMenu(sf::RenderWindow& window) {

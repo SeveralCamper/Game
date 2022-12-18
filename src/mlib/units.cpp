@@ -20,6 +20,7 @@ void PlayerUnits::update(float time) {
     speed = 0; // остановка персонажа
     sprite.setPosition(coordX,coordY);
     dieSprite.setPosition(coordX,coordY);
+    fireSprite.setPosition(coordX,coordY);
 }
 
 // PARENTAL ABSTRACT OBJECT CLASS
@@ -124,6 +125,7 @@ void Object::setSpriteRotation(int spriteRotation) {
     this->spriteRotation = spriteRotation;
     sprite.setRotation(spriteRotation);
     dieSprite.setRotation(spriteRotation);
+    fireSprite.setRotation(spriteRotation);
 }
 
 void Object::setCoordX(float coordX) {
@@ -151,7 +153,7 @@ void Object::setDirection(int direction) {
 }
 
 void Object::setSprite(sf::Texture newTexture) {
-    getSprite().setTexture(newTexture);
+    sprite.setTexture(newTexture);
 }
 
 // STRUCTURES CLASS

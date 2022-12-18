@@ -4,7 +4,7 @@
 int const FIELD_TILES_ARRAY_X = 10;
 int const FIELD_TILES_ARRAY_Y = 10;
 int const RIVER_TOP_FIELD = 485;
-int const RIVER_DOWN_FIELD = 685;
+int const RIVER_DOWN_FIELD = 700;
 int const FIELD_RIGHT_BOARD = 1840;
 int const FIELD_LEFT_BOARD = 10;
 int const FIELD_TOP_BOARD = 10;
