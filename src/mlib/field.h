@@ -145,7 +145,10 @@ class Environment {
         diedFSSprite.setTexture(diedFSTexture);
 
         textureEnd.loadFromFile("sprites/tds-modern-gui-pixel-art/Mission Failed/BG.png");
-        spriteEnd.setTexture(textureEnd);    
+        spriteEnd.setTexture(textureEnd);  
+
+        textureWin.loadFromFile("sprites/tds-modern-gui-pixel-art/Victory/Victory_panel_Preset.png");
+        spriteWin.setTexture(textureWin);  
 
         // BASE ENVIRONMENT
 
@@ -164,7 +167,8 @@ class Environment {
     void SetEnvironment(sf::RenderWindow& window);
     void SetEnvironmentTrees(sf::RenderWindow& window);
 
-    void endGame(sf::RenderWindow& window);
+    void endGameLose(sf::RenderWindow& window);
+    void endGameWin(sf::RenderWindow& window);
 
     private:
 
@@ -253,6 +257,9 @@ class Environment {
 
         sf::Texture textureEnd;
         sf::Sprite spriteEnd;
+
+        sf::Texture textureWin;
+        sf::Sprite spriteWin;
 
         // BASE ENVIRONMENT
 

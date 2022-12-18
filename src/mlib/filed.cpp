@@ -10,10 +10,16 @@ float Field::GetFieldYSize()
     return fieldYSize;
 }
 
-void Environment::endGame(sf::RenderWindow& window) {
+void Environment::endGameLose(sf::RenderWindow& window) {
     spriteEnd.setPosition(700, 350);
-    spriteEnd.setScale(sf::Vector2f(2,2));
+    spriteEnd.setScale(sf::Vector2f(2, 2));
 	window.draw(spriteEnd);
+}
+
+void Environment::endGameWin(sf::RenderWindow& window) {
+    spriteWin.setPosition(700, 260);
+    spriteWin.setScale(sf::Vector2f(2, 2));
+	window.draw(spriteWin);
 }
 
 void Field::setFiled(sf::RenderWindow &window)

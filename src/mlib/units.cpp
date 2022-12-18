@@ -34,7 +34,11 @@ int Object::getHP() {
 }
 
 int Object::getDMG() {
-    return DMG;
+    if (this->HP > 0) {
+        return DMG;
+    } else {
+        return 0;
+    }
 }
 
 int Object::getRange() {
@@ -106,7 +110,9 @@ void Object::setDMG(int DMG) {
 }
 
 void Object::giveDMG(int DMG) {
-    this->HP = this->HP - DMG;
+    if (this->HP > 0) {
+        this->HP = this->HP - DMG;
+    }
 }
 
 void Object::setAttackCD(int attackCD) {

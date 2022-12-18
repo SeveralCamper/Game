@@ -175,7 +175,7 @@ class Hero : public PlayerUnits {
 
         this->coordX = coordX; this->coordY = coordY;
         HP = 200;
-        DMG = 10;
+        DMG = 5;
         range = 100;
     }
 
@@ -268,7 +268,13 @@ class EnemySoldier : public AIUnits {
         } else if (Name == "Sniper") {
             HP = 50;
             DMG = 20;
-            range = 400;           
+            range = 400;      
+
+            fireFilePath = "sprites/tds-modern-soldiers-and-vehicles-sprites-2/Sniper/Shot/Shot1.png";
+            fireImage.loadFromFile(fireFilePath);
+            fireTexture.loadFromImage(fireImage);
+            fireSprite.setTexture(fireTexture);
+            fireSprite.setOrigin(sf::Vector2f(spriteSizeX, spriteSizeY));     
         } else if (Name == "Capitan") {
             HP = 150;
             DMG = 15;

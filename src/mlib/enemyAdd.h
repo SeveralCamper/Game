@@ -7,7 +7,7 @@
 
 #include "units.h"
 
-void enemyListSpawn(std::list<EnemySoldier*> &entities);
+void enemyListSpawn(std::list<EnemySoldier*> &entities, int amount);
 void enemyListDelete(std::list<EnemySoldier*> &entities);
 
 #endif //  ENEMY_ADD_H_

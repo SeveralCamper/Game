@@ -27,14 +27,14 @@ int main() {
 	std::list<EnemySoldier*>::iterator it;
 
 	std::vector<std::thread> thread_pool;
-	std::thread th(enemyListSpawn, std::ref(entities));
+	std::thread th(enemyListSpawn, std::ref(entities), 10);
 
 	sf::RenderWindow window(sf::VideoMode(GameField.GetFieldXSize(), GameField.GetFieldYSize()), "Game");
 
-	int endFlag = 0, fireFlag = 0;
+	int endFlagLose = 0, endFlagWin = 0, fireFlag = 0;
 
 	while (window.isOpen()) {
-		if (!endFlag) {
+		if (!endFlagLose && !endFlagWin) {
 		float time = clock.getElapsedTime().asMicroseconds();
 		clock.restart();
 		time = time / 800;
@@ -128,7 +128,7 @@ int main() {
 
 		// AI CONTROL
 		for (it = entities.begin(); it != entities.end(); it++) {
-			if ((*it)->getCoordY() > 400 && (*it)->getHP() != 0) {
+			if ((*it)->getCoordY() - (*it)->getRange() + 20 > 200 && (*it)->getHP() != 0) {
 				(*it)->setSPeed(0.05);
 			}
 		}
@@ -159,13 +159,26 @@ int main() {
 		}
 
 		Item.SetEnvironmentTrees(window);
-		if (!Player.getIsAlive() || !Base.getIsAlive()) {
-			Item.endGame(window);
-			endFlag = 1;
-		}
 
 		window.draw(Base.getSprite());
 		window.draw(FS1.getSprite());
+
+		if (!Player.getIsAlive() || !Base.getIsAlive()) {
+			Item.endGameLose(window);
+			endFlagLose = 1;
+		}
+
+		for (it = entities.begin(); it != entities.end(); it++) {
+			endFlagWin = 1;
+			if ((*it)->getHP() > 0) {
+				endFlagWin = 0;
+				break;
+			}
+		}
+
+		if (endFlagWin) {
+			Item.endGameWin(window);
+		}
 
 		int BaseOrSolider;
 
@@ -183,17 +196,18 @@ int main() {
 
 			// printf("HP: %d\n", (*it)->getHP());
 
-			if ((((*it)->getCoordY()-(*it)->getRange()) <= Base.getCoordY()) && ((*it)->getHP() != 0)) {
+			if ((((*it)->getCoordY() - (*it)->getRange()) <= Base.getCoordY()) && ((*it)->getHP() != 0)) {
 				(*it)->incAttackCD();
 				if ((*it)->getAttackCD() == 112) {
 					BaseOrSolider++;
-					window.draw((*it)->getFireSprite());
 					if (Base.getHP() != 0 && (*it)->getHP() != 0) {
 						if (BaseOrSolider == 5 && FS1.getHP() != 0 && (*it)->getHP() != 0) {
 							FS1.giveDMG((*it)->getDMG());
+							window.draw((*it)->getFireSprite());
 							BaseOrSolider = 0;
 						} else if ((*it)->getHP() != 0) {
 							Base.giveDMG((*it)->getDMG());
+							window.draw((*it)->getFireSprite());
 						}
 					}
 					printf("base: %d\n", Base.getHP());
@@ -234,7 +248,7 @@ int main() {
 		window.display();		
 		} else {
 			int timeAfterDie = 0;
-			while(timeAfterDie < 1500) {
+			while(timeAfterDie < 1000) {
 				timeAfterDie++;
 				std::this_thread::sleep_for(std::chrono::milliseconds(1));
 			}
